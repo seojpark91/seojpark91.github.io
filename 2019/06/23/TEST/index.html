@@ -13,7 +13,7 @@
     
 
     
-        <meta name="description" content="TESTTESTTEST$$a = \sum_{n=1}^{n}an+b$$">
+        <meta name="description" content="TESTTESTTESTa = \sum_{n=1}^{n}an+b">
     
 
     <!--Author-->
@@ -28,7 +28,7 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="TESTTESTTEST$$a = \sum_{n=1}^{n}an+b$$">
+        <meta property="og:description" content="TESTTESTTESTa = \sum_{n=1}^{n}an+b">
     
 
     <!--Open Graph Site Name-->
@@ -193,8 +193,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h1><h2 id="TEST-1"><a href="#TEST-1" class="headerlink" title="TEST"></a>TEST</h2><h3 id="TEST-2"><a href="#TEST-2" class="headerlink" title="TEST"></a>TEST</h3><p>$$a = \sum_{n=1}^{n}an+b$$</p>
-
+                <h1 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h1><h2 id="TEST-1"><a href="#TEST-1" class="headerlink" title="TEST"></a>TEST</h2><h3 id="TEST-2"><a href="#TEST-2" class="headerlink" title="TEST"></a>TEST</h3><script type="math/tex; mode=display">a = \sum_{n=1}^{n}an+b</script>
 
                 
             </div>
@@ -274,6 +273,22 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 
 </html>

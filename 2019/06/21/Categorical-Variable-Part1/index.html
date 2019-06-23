@@ -336,8 +336,9 @@
     </tr>
 </table>
 
-<p>카이제곱 값은 행과 열 값에 따라 계산 되며 행과 열의 갯수가 2가 넘어갈 때, 아래와 같이 계산 됩니다.<br>$$\chi^2 = \sum \frac{(O - E)^2}{E}$$<br>하지만 행과 열의 갯수가 정확히 2일 때에는, 위의 식에서 <a href="https://en.wikipedia.org/wiki/Continuity_correction" target="_blank" rel="noopener">correction of continuity</a> (연속성 수정) 을 해 주어야 합니다. correction of continuity가 필요한 이유는 두가지 값을 가지는 이항확률변수를 연속확률변수로 접근시킬 때 발생되는 오차를 줄이기 위해서 이며 0.5를 $O$와 $E$의 차이에서 빼 줍니다.<br>$$\chi^2 = \sum \frac{(\left\lvert O - E\right\rvert-0.5)^2}{E}$$  </p>
-<table border="2" width="800" height="300" align="center">
+<p>카이제곱 값은 행과 열 값에 따라 계산 되며 행과 열의 갯수가 2가 넘어갈 때, 아래와 같이 계산 됩니다.   </p>
+<script type="math/tex; mode=display">\chi^2 = \sum \frac{(O - E)^2}{E}</script><p>하지만 행과 열의 갯수가 정확히 2일 때에는, 위의 식에서 <a href="https://en.wikipedia.org/wiki/Continuity_correction" target="_blank" rel="noopener">correction of continuity</a> (연속성 수정) 을 해 주어야 합니다. correction of continuity가 필요한 이유는 두가지 값을 가지는 이항확률변수를 연속확률변수로 접근시킬 때 발생되는 오차를 줄이기 위해서 이며 0.5를 $O$와 $E$의 차이에서 빼 줍니다.  </p>
+<script type="math/tex; mode=display">\chi^2 = \sum \frac{(\left\lvert O - E\right\rvert-0.5)^2}{E}</script><table border="2" width="800" height="300" align="center">
     <th></th>
     <th style="text-align: center;">진보 성향</th>
     <th style="text-align: center;">보수 성향</th>
@@ -403,31 +404,29 @@
     </tr>
 </table>
 
-<p>일반적으로 카이 제곱 검정 과정을 걸칠 때 자유도는 아래와 같으며 $r$은 행의 갯수 $c$는 열의 갯수를 나타냅니다.<br>$$ df = (r-1)(c-1) $$</p>
-<p>위의 A 대학교 카이제곱 검정을 할 때의 자유도는 $df = (2-1)(2-1) = 1$ 이 되며 아래의 그래프는 자유도가 1 때의 카이제곱 확률분포를 보여줍니다.</p>
+<p>일반적으로 카이 제곱 검정 과정을 걸칠 때 자유도는 아래와 같으며 $r$은 행의 갯수 $c$는 열의 갯수를 나타냅니다.   </p>
+<script type="math/tex; mode=display">df = (r-1)(c-1)</script><p>위의 A 대학교 카이제곱 검정을 할 때의 자유도는 $df = (2-1)(2-1) = 1$ 이 되며 아래의 그래프는 자유도가 1 때의 카이제곱 확률분포를 보여줍니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line">xx = np.linspace(<span class="number">0.01</span>, <span class="number">15</span>, <span class="number">100</span>)</span><br><span class="line">rv = sp.stats.chi2(df=<span class="number">1</span>)</span><br><span class="line">plt.plot(xx, rv.pdf(xx), ls=<span class="string">"-"</span>, label=(<span class="string">"chi2 (dof = %d)"</span> % <span class="number">1</span>))</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">15.1</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">0.6</span>)</span><br><span class="line">plt.title(<span class="string">"자유도 1인 카이제곱 표본 분포"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"$\chi^2$"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"확률값"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p><img src="output_7_0.png" alt="png"></p>
 <p>위에서 계산한 $\chi^2 = 11.434$는 유의 수준 (level of significance) 0.001일때의 카이제곱 값 10.828을 넘는 수치 입니다. 즉, 귀무가설 “정치적 성향에 대하여 A 대학교 의대와 법대를 다니는 학생 사이에는 차이가 없다”이 맞다면 위의 관찰된 A 대학교 의대와 법대를 다니는 학생 사이에서 정치적 성향의 차이를 그저 우연으로 관찰될 확률 (p-value)이 0.001%보다 작다는 결론을 내릴 수 있습니다. 위의 그래프를 보아도 카이제곱값이 11.434일때의 확률이 0에 가깝다는 것을 확인할 수 있습니다. 그러므로 이 정치학도는 귀무가설을 기각할 수 있습니다.</p>
 <p>아래는 탄자니아 식수개발관련 사업 데이터 입니다. 제가 세운 가설은 “펌프로 끌어올릴 수 있는 우물물의 양 (quantity_group)과 우물물의 출처가 어디인지 (source_type)을 나타내는 두 변수가 상관관계를 가진다” 였고, 이를 테스트 해 보려고 합니다. 귀무가설은 두 변수가 독립이다 이며 대립가설은 이 두 변수가 상관관계를 가진다 입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">"data/training.csv"</span>)</span><br></pre></td></tr></table></figure>
-
 <p>두 변수간의 contingency table을 나타내고, 이 table을 scipy의 <code>sp.stats.chi2_contingency</code>함수를 사용하여 유의 확률을 확인합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.crosstab(index=df.source_type, columns = df.quantity_group)</span><br></pre></td></tr></table></figure>
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th {
-    vertical-align: top;
-}
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th {
-    text-align: center;
-}</code></pre><p></style><p></p>
+    .dataframe thead th {
+        text-align: center;
+    }
+</style>
 <table border="2" width="800" height="300" class="dataframe">
   <thead>
     <tr style="text-align: center;">
@@ -512,10 +511,10 @@
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chi2, p, dof, ex = sp.stats.chi2_contingency(pd.crosstab(index=df.source_type, columns = df.quantity_group))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"chi-square test statistics = &#123;&#125;"</span>.format(chi2))</span><br><span class="line">print(<span class="string">"p-value = &#123;&#125;"</span>.format(p))</span><br><span class="line">print(<span class="string">"degree of freedom = &#123;&#125;"</span>.format(dof))</span><br></pre></td></tr></table></figure>
-
 <pre><code>chi-square test statistics = 9398.454444629386
 p-value = 0.0
-degree of freedom = 24</code></pre><p>위의 결과의 유의확률(p-value)은 카이제곱 통계량이 9398.454로 나올 확률을 나타내며 0에 가깝다는 것을 확인할 수 있습니다. 즉, 귀무가설인 “펌프로 끌어올릴 수 있는 우물물의 양 (quantity_group)과 우물물의 출처가 어디인지 (source_type)을 나타내는 두 변수간의 상관관계가 없다”를 기각 할 수 있는 p-value 0을 가집니다. 하지만 시작부분에서 언급했다시피 우리는 귀무가설만 기각했을 뿐, 상관관계가 얼만큼 있는지는 카이제곱 검정으로는 확인할 수 없습니다. 다음 포스팅에는 Theil’s U를 이용한 명목적 카테고리 변수 사이의 상관관계의 세기를 알아보겠습니다.</p>
+degree of freedom = 24
+</code></pre><p>위의 결과의 유의확률(p-value)은 카이제곱 통계량이 9398.454로 나올 확률을 나타내며 0에 가깝다는 것을 확인할 수 있습니다. 즉, 귀무가설인 “펌프로 끌어올릴 수 있는 우물물의 양 (quantity_group)과 우물물의 출처가 어디인지 (source_type)을 나타내는 두 변수간의 상관관계가 없다”를 기각 할 수 있는 p-value 0을 가집니다. 하지만 시작부분에서 언급했다시피 우리는 귀무가설만 기각했을 뿐, 상관관계가 얼만큼 있는지는 카이제곱 검정으로는 확인할 수 없습니다. 다음 포스팅에는 Theil’s U를 이용한 명목적 카테고리 변수 사이의 상관관계의 세기를 알아보겠습니다.</p>
 
 
                 
@@ -596,6 +595,22 @@ degree of freedom = 24</code></pre><p>위의 결과의 유의확률(p-value)은 
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 
 </html>
