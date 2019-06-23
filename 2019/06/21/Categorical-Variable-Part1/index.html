@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="All About Correlation between Categorical Variables - Chi square test of association탄자니아의 식수개발사업 관련 데이터를 분석하면서 거의 모든 변수들이 명목형 카테고리 변수인 데이터를 처음 접하게 되었습">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="All About Correlation between Categorical Variables - Part 1">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="All About Correlation between Categorical Variables - Chi square test of association탄자니아의 식수개발사업 관련 데이터를 분석하면서 거의 모든 변수들이 명목형 카테고리 변수인 데이터를 처음 접하게 되었습">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>All About Correlation between Categorical Variables - Part 1 - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>All About Correlation between Categorical Variables - Part 1</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-06-21
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="All-About-Correlation-between-Categorical-Variables-Chi-square-test-of-association"><a href="#All-About-Correlation-between-Categorical-Variables-Chi-square-test-of-association" class="headerlink" title="All About Correlation between Categorical Variables - Chi square test of association"></a>All About Correlation between Categorical Variables - Chi square test of association</h1><p>탄자니아의 식수개발사업 관련 데이터를 분석하면서 거의 모든 변수들이 명목형 카테고리 변수인 데이터를 처음 접하게 되었습니다. 카테고리 값들이 서로 상이한 변수들을 보며, 어떻게 하면 카테고리 변수들간의 상관 관계를 분석할 수 있을까 공부를 하게 되었으며, 그 과정에서 얻은 인싸이트를 정리해 보았습니다.<br>두 방법을 통해 카테고리 변수 간의 상관관계를 확인해 볼 수 있는데 <a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test" target="_blank" rel="noopener">$\chi^2$ (Chi-square) contingency test (카이제곱 테스트)</a>와 두 변수 간의 conditional entropy (조건부 엔트로피)를 활용한 <a href="https://en.wikipedia.org/wiki/Uncertainty_coefficient" target="_blank" rel="noopener">Theil’s U</a>가 있습니다.</p>
+<p>카이제곱 테스트로는 두 변수간의 관계가 독립적인지 상관관계를 가지는지 확인해 볼 수 있지만 두 카테고리 변수간의 관계의 세기는 알 수가 없습니다. 대다수가 알고 있는 Pearson, Kendall, Spearman 상관 계수를 활용하려 해 보아도 명목형 카테고리 변수간의 관계의 세기를 잴 수 없습니다. 이런 명목적 카테고리 변수 간의 관계의 세기는 Theil’s U를 이용하여 알아볼 수 있는데 이 부분은 Part 2에서 다루도록 하겠습니다.</p>
+<p>쉬운 예를 하나 생각해 봅시다. A 대학교에 의대와 법대가 있다고 가정해 봅니다. 한 정치학도가 학생들의 정치적 성향이 학생들이 다니는 단과 대학과 상관 관계가 있을 것이라 의문을 제기했습니다. 그는 랜덤하게 두 단과 대학의 학생에게 진보와 보수 중 어떤 정치적 성향을 가지고 있는지 질문을 했고 그 결과를 아래와 같은 표 (contingency table) 로 나타낼 수 있습니다.</p>
+<table border="2" width="900" align="center">
+    <th></th>
+    <th>진보 성향</th>
+    <th>보수 성향</th>
+    <th></th>
+    <tr>
+        <th>A 대학교 의대</th>
+        <td>A 대학교 의대 진보 성향 학생 수</td>
+        <td>A 대학교 의대 보수 성향 학생 수</td>
+        <th>총 A 대학교 의대 학생들 수</th>
+    </tr>
+    <tr>
+        <th>A 대학교 법대</th>
+        <td>A 대학교 법대 진보 성향 학생 수</td>
+        <td>A 대학교 법대 보수 성향 학생 수</td>
+        <th>총 A 대학교 법대 학생들 수</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th>총 진보 성향 학생 수 </th>
+        <th>총 보수 성향 학생 수</th>
+        <td></td>
+    </tr>
+</table>
+
+
+<p>카이제곱 검정이 위와 같은 contingency table에 적용될 때에는 주로 두 카테고리 변수가 상관관계가 있는지 없는지를 알아보기 위함 입니다. 이것을 <strong>chi square test of association</strong> (카이제곱 연관성 검정) 이라고 합니다. 만약 두 단과 대학의 학생들의 정치적 성향이 아래와 같이 같은 비율로 나누어 진다면 두 카테고리 변수 사이에는 관계가 있다고 볼 수 없습니다. A대학교 의대 학생이던 법대 학생이던 간에 진보 성향을 지진 학생과 보수 성향을 지닌 학생의 비율이 같은 것을 확인할 수 있습니다.</p>
+<table align="center" border="2" width="500">
+    <th></th>
+    <th align="center">진보 성향</th>
+    <th align="center">보수 성향</th>
+    <tr>
+        <th>A 대학교 의대</th>
+        <td>55%</td>
+        <td>45%</td>
+    </tr>
+    <tr>
+        <th>A 대학교 법대</th>
+        <td>55%</td>
+        <td>45%</td>
+    </tr>
+</table>
+
+<p>만약 아래와 같이 상이한 비율로 나뉘어 졌다면 두 카테고리 변수 사이에 관계가 통계적으로 유의한지에 대한 테스트를 해볼 수 있습니다. </p>
+<table align="center" border="2" width="500">
+    <th></th>
+    <th align="center">진보 성향</th>
+    <th align="center">보수 성향</th>
+    <tr>
+        <th>A 대학교 의대</th>
+        <td>55%</td>
+        <td>45%</td>
+    </tr>
+    <tr>
+        <th>A 대학교 법대</th>
+        <td>45%</td>
+        <td>55%</td>
+    </tr>
+</table>
+
+<p>이 때의 귀무 가설은 “정치적 성향에 대하여 A 대학교 의대와 법대를 다니는 학생 사이에는 차이가 없다”가 되며 이 때 카이 제곱 연관성 검정은 귀무 가설이 맞다는 가정 하에 A대학교 의대와 법대를 다니는 학생들을 랜덤하게 뽑아 물어봤을 때 위와 같은 정치적 성향의 차이가 충분히 큰지 아니면 그저 우연인지를 확인 합니다.</p>
+<p>이제 실제 숫자를 통해 계산을 해보도록 하겠습니다. 계산을 쉽게 하기 위해 A 대학교의 총 학생 수를 100명이라고 하겠습니다.</p>
+<table border="2" width="900" align="center">
+    <th></th>
+    <th>진보 성향</th>
+    <th>보수 성향</th>
+    <th></th>
+    <tr>
+        <th>A 대학교 의대</th>
+        <td>a</td>
+        <td>b</td>
+        <th>46명</th>
+    </tr>
+    <tr>
+        <th>A 대학교 법대</th>
+        <td>c</td>
+        <td>d</td>
+        <th>54명</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th>52명</th>
+        <th>48명</th>
+        <td>100명</td>
+    </tr>
+</table>
+
+<p>그저 단순한 우연의 일치라면 A 대학교 의대 학생이 진보적 정치 성향을 가지고 있을 확률은 $\frac{46}{100} \times \frac{52}{100} = 0.2392$ 입니다. 즉 a에 들어갈 기대값 $E_a$ (Expected frequency of cases)은 $0.2392$ 이고, 각 cell a, b, c, d에 들어갈 값은 $R$이 각 행을 더한 값 (marginal total of the row)이고 $C$ (marginal total of the column) 가 각 열을 더한 값일 때, $E_{cell} = \frac{R}{N} \times \frac{C}{N} \times N$ 가 됩니다. 이 식을 일반화 시켜 보면, $E_{cell} = \frac{R \times C}{N}$ 으로 나타낼 수 있고, 이 값은 귀무 가설이 맞다는 가정 하에 가질 수 있는 값들 이고, 아래와 같습니다.</p>
+<table border="2" width="600" height="300" align="center">
+    <th></th>
+    <th style="text-align: center;">진보 성향</th>
+    <th style="text-align: center;">보수 성향</th>
+    <th></th>
+    <tr>
+        <th style="text-align: center;">A 대학교 의대</th>
+        <td>$E_a =  \frac{46 \times 52}{100} = 23.92$     </td>
+        <td>$E_b =  \frac{46 \times 48}{100} = 22.08$</td>
+        <th style="text-align: center;">46명</th>
+    </tr>
+    <tr>
+        <th style="text-align: center;">A 대학교 법대</th>
+        <td>$E_c =  \frac{54 \times 52}{100} = 28.08$</td>
+        <td>$E_d =  \frac{54 \times 48}{100} = 25.92$</td>
+        <th style="text-align: center;">54명</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th style="text-align: center;">52명</th>
+        <th style="text-align: center;">48명</th>
+        <td style="text-align: center;">100명</td>
+    </tr>
+</table>
+
+
+<p>즉, 귀무 가설이 맞을 때, 우리는 두 A대학교 의대 학생들과 법대 학생들을 기대할 수 있고 이들이 같은 비율로 진보 성향과 보수 성향을 가지고 있다고 말할 수 있습니다. 그리고 이 값이 위에서 계산한 $E$ 의 값이 됩니다. 관찰된 값 $O$ (observation) 과 함께 $E$ (Expectation) 를 아래 빨간 색으로 표시를 했습니다.</p>
+<table border="2" width="500" height="200" align="center" style="text-align: center;">
+    <th></th>
+    <th style="text-align: center;">진보 성향</th>
+    <th style="text-align: center;">보수 성향</th>
+    <th></th>
+    <tr>
+        <th style="text-align: center;">A 대학교 의대</th>
+        <td>15 <br><span style="color:red">23.92</span></td>
+        <td>31     <br><span style="color:red">22.08</span></td>
+        <th style="text-align: center;">46명</th>
+    </tr>
+    <tr>
+        <th style="text-align: center;">A 대학교 법대</th>
+        <td>37     <br><span style="color:red">28.08</span></td>
+        <td>17 <br><span style="color:red">25.92</span></td>
+        <th style="text-align: center;">54명</th>
+    </tr>
+    <tr>
+        <td></td>
+        <th style="text-align: center;">52명</th>
+        <th style="text-align: center;">48명</th>
+        <td style="text-align: center;">100명</td>
+    </tr>
+</table>
+
+<p>카이제곱 값은 행과 열 값에 따라 계산 되며 행과 열의 갯수가 2가 넘어갈 때, 아래와 같이 계산 됩니다.<br>$$\chi^2 = \sum \frac{(O - E)^2}{E}$$<br>하지만 행과 열의 갯수가 정확히 2일 때에는, 위의 식에서 <a href="https://en.wikipedia.org/wiki/Continuity_correction" target="_blank" rel="noopener">correction of continuity</a> (연속성 수정) 을 해 주어야 합니다. correction of continuity가 필요한 이유는 두가지 값을 가지는 이항확률변수를 연속확률변수로 접근시킬 때 발생되는 오차를 줄이기 위해서 이며 0.5를 $O$와 $E$의 차이에서 빼 줍니다.<br>$$\chi^2 = \sum \frac{(\left\lvert O - E\right\rvert-0.5)^2}{E}$$  </p>
+<table border="2" width="800" height="300" align="center">
+    <th></th>
+    <th style="text-align: center;">진보 성향</th>
+    <th style="text-align: center;">보수 성향</th>
+    <th></th>
+    <tr>
+        <th style="text-align: center;">A 대학교 의대</th>
+        <td style="text-align: center;">$\frac{(\left\lvert 15 - 23.92\right\rvert-0.5)^2}{23.92} = 2.964$</td>
+        <td style="text-align: center;">$\frac{(\left\lvert 31 - 22.08\right\rvert-0.5)^2}{22.08} = 3.21$</td>
+        <td height="100"></td>
+    </tr>
+    <tr>
+        <th style="text-align: center;">A 대학교 법대</th>
+        <td style="text-align: center;">$\frac{(\left\lvert 37 - 28.08\right\rvert-0.5)^2}{28.08} = 2.525$</td>
+        <td style="text-align: center;">$\frac{(\left\lvert 17 - 25.92\right\rvert-0.5)^2}{25.92} = 2.735$</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align: center;">sum: $\chi^2 = 11.434$</td>
+    </tr>
+</table>
+
+<p>다음 스탭은 자유도(degrees of freedom)에 따라 모양이 변하는 카이제곱 표본분포 (theoretical sampling distribution of chi-square)를 사용하여 검정을 합니다. 가설 검정을 하기 위한 유의확률 (p-value)를 구하기 위해서는 자유도를 알아야 하는데 카테고리 변수가 하나가 있을 때 (1차원)의 자유도는 카테고리 갯수 - 1 입니다. 하지만 2차원일때는 다른 식을 사용하게 됩니다. 아래와 같이 행과 열이 각각 2개씩 있을 때 어떤 정수를 어느 cell에나 넣을 수 있지만 총 합계는 일치해야 합니다. 여기에서 “자유”는 총 합에 제한 되어 있습니다. 10을 a에 넣었을 때 b=40, c=38, d=2로 다른 cell들의 값이 모두 정해지게 됩니다. 마찬가지로 20을 c에 넣었을 때 a=28, b=22, d=20가 됩니다. 이렇게 행과 열이 각각 2개씩 있을 때의 자유도는 어떤 경우에도 1이 됩니다.  </p>
+<table border="2" width="300" align="center">
+    <tr>
+        <td style="text-align: center;">cell a = ? </td>
+        <td style="text-align: center;">cell b = ? </td>
+        <td style="text-align: center;">50</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">cell c = ?</td>
+        <td style="text-align: center;">cell d = ?</td>
+        <td style="text-align: center;">40</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">48</td>
+        <td style="text-align: center;">42</td>
+        <td style="text-align: center;">90</td>
+    </tr>
+</table>
+
+<p>이번에는 2개의 행과 3개의 열이 있다고 한다면, “자유”는 조금 오르게 되지만 여전히 총합에 제한되게 됩니다. 마찬가지로 10을 a에 넣었을 때 d는 15로 정해지게 됩니다. 하지만 나머지 4개의 cell들은 어떠한 정수를 넣어도 됩니다. 이 4개의 cell중 하나에 어떤 정수를 넣었을 때 나머지 cell들의 값은 모두 정해지게 됩니다. 이렇게 카이제곱을 계산할 표에서 2개의 열과 3개의 행 (혹은 3개의 열과 2개의 행) 이 있다면 자유도는 어떤 상황에서도 2가 됩니다.</p>
+<table border="2" width="300" align="center">
+    <tr>
+        <td>cell a = ? </td>
+        <td>cell b = ? </td>
+        <td>cell c = ? </td>
+        <td>50</td>
+    </tr>
+    <tr>
+        <td>cell d = ?</td>
+        <td>cell e = ?</td>
+        <td>cell f = ?</td>
+        <td>40</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">25</td>
+        <td style="text-align: center;">40</td>
+        <td style="text-align: center;">25</td>
+        <td>90</td>
+    </tr>
+</table>
+
+<p>일반적으로 카이 제곱 검정 과정을 걸칠 때 자유도는 아래와 같으며 $r$은 행의 갯수 $c$는 열의 갯수를 나타냅니다.<br>$$ df = (r-1)(c-1) $$</p>
+<p>위의 A 대학교 카이제곱 검정을 할 때의 자유도는 $df = (2-1)(2-1) = 1$ 이 되며 아래의 그래프는 자유도가 1 때의 카이제곱 확률분포를 보여줍니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line">xx = np.linspace(<span class="number">0.01</span>, <span class="number">15</span>, <span class="number">100</span>)</span><br><span class="line">rv = sp.stats.chi2(df=<span class="number">1</span>)</span><br><span class="line">plt.plot(xx, rv.pdf(xx), ls=<span class="string">"-"</span>, label=(<span class="string">"chi2 (dof = %d)"</span> % <span class="number">1</span>))</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">15.1</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">0.6</span>)</span><br><span class="line">plt.title(<span class="string">"자유도 1인 카이제곱 표본 분포"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"$\chi^2$"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"확률값"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="output_7_0.png" alt="png"></p>
+<p>위에서 계산한 $\chi^2 = 11.434$는 유의 수준 (level of significance) 0.001일때의 카이제곱 값 10.828을 넘는 수치 입니다. 즉, 귀무가설 “정치적 성향에 대하여 A 대학교 의대와 법대를 다니는 학생 사이에는 차이가 없다”이 맞다면 위의 관찰된 A 대학교 의대와 법대를 다니는 학생 사이에서 정치적 성향의 차이를 그저 우연으로 관찰될 확률 (p-value)이 0.001%보다 작다는 결론을 내릴 수 있습니다. 위의 그래프를 보아도 카이제곱값이 11.434일때의 확률이 0에 가깝다는 것을 확인할 수 있습니다. 그러므로 이 정치학도는 귀무가설을 기각할 수 있습니다.</p>
+<p>아래는 탄자니아 식수개발관련 사업 데이터 입니다. 제가 세운 가설은 “펌프로 끌어올릴 수 있는 우물물의 양 (quantity_group)과 우물물의 출처가 어디인지 (source_type)을 나타내는 두 변수가 상관관계를 가진다” 였고, 이를 테스트 해 보려고 합니다. 귀무가설은 두 변수가 독립이다 이며 대립가설은 이 두 변수가 상관관계를 가진다 입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">"data/training.csv"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>두 변수간의 contingency table을 나타내고, 이 table을 scipy의 <code>sp.stats.chi2_contingency</code>함수를 사용하여 유의 확률을 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.crosstab(index=df.source_type, columns = df.quantity_group)</span><br></pre></td></tr></table></figure>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: center;
+}</code></pre><p></style><p></p>
+<table border="2" width="800" height="300" class="dataframe">
+  <thead>
+    <tr style="text-align: center;">
+      <th>quantity_group</th>
+      <th>dry</th>
+      <th>enough</th>
+      <th>insufficient</th>
+      <th>seasonal</th>
+      <th>unknown</th>
+    </tr>
+    <tr>
+      <th>source_type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>borehole</th>
+      <td>1472</td>
+      <td>7229</td>
+      <td>2680</td>
+      <td>283</td>
+      <td>285</td>
+    </tr>
+    <tr>
+      <th>dam</th>
+      <td>65</td>
+      <td>372</td>
+      <td>180</td>
+      <td>30</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>other</th>
+      <td>36</td>
+      <td>134</td>
+      <td>68</td>
+      <td>12</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>rainwater harvesting</th>
+      <td>150</td>
+      <td>295</td>
+      <td>644</td>
+      <td>1182</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>river/lake</th>
+      <td>867</td>
+      <td>6173</td>
+      <td>2375</td>
+      <td>852</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>shallow well</th>
+      <td>2028</td>
+      <td>8443</td>
+      <td>4782</td>
+      <td>1354</td>
+      <td>217</td>
+    </tr>
+    <tr>
+      <th>spring</th>
+      <td>1628</td>
+      <td>10540</td>
+      <td>4400</td>
+      <td>337</td>
+      <td>116</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chi2, p, dof, ex = sp.stats.chi2_contingency(pd.crosstab(index=df.source_type, columns = df.quantity_group))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"chi-square test statistics = &#123;&#125;"</span>.format(chi2))</span><br><span class="line">print(<span class="string">"p-value = &#123;&#125;"</span>.format(p))</span><br><span class="line">print(<span class="string">"degree of freedom = &#123;&#125;"</span>.format(dof))</span><br></pre></td></tr></table></figure>
+
+<pre><code>chi-square test statistics = 9398.454444629386
+p-value = 0.0
+degree of freedom = 24</code></pre><p>위의 결과의 유의확률(p-value)은 카이제곱 통계량이 9398.454로 나올 확률을 나타내며 0에 가깝다는 것을 확인할 수 있습니다. 즉, 귀무가설인 “펌프로 끌어올릴 수 있는 우물물의 양 (quantity_group)과 우물물의 출처가 어디인지 (source_type)을 나타내는 두 변수간의 상관관계가 없다”를 기각 할 수 있는 p-value 0을 가집니다. 하지만 시작부분에서 언급했다시피 우리는 귀무가설만 기각했을 뿐, 상관관계가 얼만큼 있는지는 카이제곱 검정으로는 확인할 수 없습니다. 다음 포스팅에는 Theil’s U를 이용한 명목적 카테고리 변수 사이의 상관관계의 세기를 알아보겠습니다.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
