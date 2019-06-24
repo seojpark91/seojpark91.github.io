@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="All About Correlation between Categorical Variables - Theil’s U앞에서 알아본 카이제곱 연관성 검정 (chi square test of association)은 두 변수사이의 관계가 통계적으로 유의미한지 (statisti">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="All About Correlation between Categorical Variables - Theil&#39;s U">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="All About Correlation between Categorical Variables - Theil’s U앞에서 알아본 카이제곱 연관성 검정 (chi square test of association)은 두 변수사이의 관계가 통계적으로 유의미한지 (statisti">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>All About Correlation between Categorical Variables - Theil&#39;s U - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>All About Correlation between Categorical Variables - Theil's U</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-06-23
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="All-About-Correlation-between-Categorical-Variables-Theil’s-U"><a href="#All-About-Correlation-between-Categorical-Variables-Theil’s-U" class="headerlink" title="All About Correlation between Categorical Variables - Theil’s U"></a>All About Correlation between Categorical Variables - Theil’s U</h1><p>앞에서 알아본 카이제곱 연관성 검정 (chi square test of association)은 두 변수사이의 관계가 통계적으로 유의미한지 (statistically significant)를 알아볼 수 있는 검정이었습니다. 하지만 이 검정을 통해서는 두 변수간의 관계가 얼만큼 중요한지에 대해서는 알려주지 않습니다. </p>
+<h2 id="상관-관계-Correlation-란"><a href="#상관-관계-Correlation-란" class="headerlink" title="상관 관계 (Correlation)란?"></a>상관 관계 (Correlation)란?</h2><p>본론으로 들어가기 전, 간단히 상관 관계 (correlation)에 대해 짚고 넘어갑니다. 상관 관계란 “두 변수간의 관계의 강도” 입니다. 몸무계와 키 사이의 상관 관계나 아파트의 넓이와 가격간의 상관 관계의 강도를 예로 들 수 있습니다. 강한 상관 관계를 예상해볼 수 있습니다.<br>우리가 잘 알고 있는 피어슨 상관 계수 <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient" target="_blank" rel="noopener">Pearson correlation coefficient</a>는 두 연속형 변수 (continuous variable)간의 선형 상관 관계를 나타내는 수치이며 -1과 1사이의 값을 지닙니다. 두 변수간의 피어슨 상관 계수를 계산하는 수식은 아래와 같습니다. 보면 두 변수 (A, B) 의 공분산 Covariance ($\text Cov$) 과 각 변수의 표준편차($\sigma$)가 피어슨 상관 계수 ($\rho$)를 구하는 식에 들어 갑니다.<br><br></p>
+<script type="math/tex; mode=display">\text{Cov}[A, B] = \text{E}[(A - \text{E}[A])(B - \text{E}[B])]$$ <br>
+$$\rho[X,Y] =  \dfrac{\text{Cov}[A, B]}{\sigma_A \cdot \sigma_B}</script><p>하지만 카테고리 변수에서는 평균과 분산의 개념이 존재하지 않습니다. 색을 나타내는 변수가 있을 때, 이 변수의 값들이 빨강, 노랑, 초록이라면 빨강에서 색의 평균을 어떻게 뺄 수 있을까요? 불가능 하다는 것을 바로 확인할 수 있습니다. </p>
+<p>이러한 이슈를 해결하기 위해 좋은 방법은 아니지만 원핫인코딩 (one-hot encoding)으로 카테고리 변수를 변환시킬 수 있습니다. 그 후, 피어슨 상관 계수를 계산합니다. 하지만 이 방법은 아래에서 곧 보겠지만, 분석하기가 아주 힘들어 집니다. 제가 가지고 있는 탄자니아 식수개발사업 관련 데이터에서 4개의 카테고리 변수 ‘water_quality’, ‘quality_group’, ‘quantity’, ‘quantity_group’을 원핫인코딩 하여 히트맵을 통해 상관관계를 나타낸 시도가 아래에 나와있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 불러오고 변수 4개를 선택 합니다</span></span><br><span class="line">df = pd.read_csv(<span class="string">"data/training.csv"</span>, index_col=<span class="string">'id'</span>)</span><br><span class="line">water_df = df[[<span class="string">'water_quality'</span>, <span class="string">'quantity'</span>, <span class="string">'source'</span>, <span class="string">'waterpoint_type'</span>]]</span><br><span class="line">water_df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: center;">
+      <th></th>
+      <th>water_quality</th>
+      <th style="text-align: center;">quantity</th>
+      <th style="text-align: center;">source</th>
+      <th style="text-align: center;">waterpoint_type</th>
+    </tr>
+    <tr>
+      <th style="text-align: center;">id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>69572</th>
+      <td style="text-align: center;">soft</td>
+      <td style="text-align: center;">enough</td>
+      <td style="text-align: center;">spring</td>
+      <td style="text-align: center;">communal standpipe</td>
+    </tr>
+    <tr>
+      <th>8776</th>
+      <td style="text-align: center;">soft</td>
+      <td style="text-align: center;">insufficient</td>
+      <td style="text-align: center;">rainwater harvesting</td>
+      <td style="text-align: center;">communal standpipe</td>
+    </tr>
+    <tr>
+      <th>34310</th>
+      <td style="text-align: center;">soft</td>
+      <td style="text-align: center;">enough</td>
+      <td style="text-align: center;">dam</td>
+      <td style="text-align: center;">communal standpipe multiple</td>
+    </tr>
+    <tr>
+      <th>67743</th>
+      <td style="text-align: center;">soft</td>
+      <td style="text-align: center;">dry</td>
+      <td style="text-align: center;">machine dbh</td>
+      <td style="text-align: center;">communal standpipe multiple</td>
+    </tr>
+    <tr>
+      <th>19728</th>
+      <td style="text-align: center;">soft</td>
+      <td style="text-align: center;">seasonal</td>
+      <td style="text-align: center;">rainwater harvesting</td>
+      <td style="text-align: center;">communal standpipe</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4개의 카테고리 변수를 원핫 인코딩 해 줍니다 </span></span><br><span class="line">water_df_dummies = pd.get_dummies(water_df)</span><br><span class="line">columns = water_df_dummies.columns</span><br><span class="line">corr = pd.DataFrame(index=columns, columns=columns)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(columns)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(columns)):</span><br><span class="line">        <span class="keyword">if</span> i == j:</span><br><span class="line">            corr[columns[i]][columns[j]] = <span class="number">1.0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            corr[columns[j]][columns[i]] = pearsonr(water_df_dummies[columns[i]],water_df_dummies[columns[j]])[<span class="number">0</span>]</span><br><span class="line">            corr[columns[i]][columns[j]] = pearsonr(water_df_dummies[columns[j]],water_df_dummies[columns[i]])[<span class="number">0</span>]</span><br><span class="line">            </span><br><span class="line">corr.fillna(value=np.nan, inplace=<span class="literal">True</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">sns.heatmap(corr, annot=<span class="literal">True</span>, fmt=<span class="string">'.2f'</span>, annot_kws=&#123;<span class="string">"size"</span>: <span class="number">3</span>&#125;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_2_0.png" alt="png"></p>
+<p>모든 카테고리 값들이 원핫인코딩으로 인해 하나의 변수가 되었기 때문에 카테고리 변수들의 모든 값에 대한 메트릭스가 만들어 졌습니다. 시간도 꽤나 걸렸고, 해석하기도 어렵습니다. 이 데이터셋에는 30개가 넘는 카테고리 변수들이 있는데 이 카테고리 변수들을 원핫인코딩을 통해 모든 변수 간의 상관 관계를 알아본다는 것은 불가능해 보입니다. </p>
+<h2 id="카테고리-변수를-위한-연관성-측도-correlation-measure-for-categorical-variables"><a href="#카테고리-변수를-위한-연관성-측도-correlation-measure-for-categorical-variables" class="headerlink" title="카테고리 변수를 위한 연관성 측도 (correlation measure for categorical variables)"></a>카테고리 변수를 위한 연관성 측도 (correlation measure for categorical variables)</h2><p>명목형 카테고리 변수에 적용될 수 있는 연관성 측도 (measure of association)가 필요합니다. 두가지가 있는데 하나는 <a href="https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V" target="_blank" rel="noopener">Cramér’s V</a> 와 <a href="https://en.wikipedia.org/wiki/Uncertainty_coefficient" target="_blank" rel="noopener">Theil’s U</a> 가 있습니다. 이 둘의 차이점은 아래에서 다룹니다. </p>
+<h3 id="Cramer’s-V"><a href="#Cramer’s-V" class="headerlink" title="Cramér’s V"></a>Cramér’s V</h3><p>Cramér’s V는 두개의 명목형 카테고리 변수간의 연관성 측도이며 지난 시간에 다룬 Pearson의 <a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test" target="_blank" rel="noopener">Chi squared Test</a>를 기반으로 합니다.</p>
+<p>Cramér’s V의 특징은:<br><br>1) 0과 1사이의 값으로 연관성의 세기를 나타냅니다. 0은 연관성이 없다이고 1은 완전한 연관성, 즉 두 변수가 같다를 의미합니다.<br><br>2) Pearson correlation coefficient처럼 두 변수의 관계가 대칭입니다. 즉, 두 변수 A, B의 연관성의 세기와 B, A의 연관성의 세기가 같다는 것을 의미합니다.<br></p>
+<p>아래는 wikipedia Cramér’s V 페이지에 나와있는 bias corrected Cramér’s V 수식을 이용하여 함수를 만들어 보았습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cramers_v</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    bias corrected cramér's V</span></span><br><span class="line"><span class="string">    a : categorical variable</span></span><br><span class="line"><span class="string">    b : another categorical variable</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    contingency_matrix = pd.crosstab(a, b)</span><br><span class="line">    chi2 = sp.stats.chi2_contingency(contingency_matrix)[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># the grand total of observations</span></span><br><span class="line">    n = contingency_matrix.sum().sum()</span><br><span class="line">    phi_coeff = chi2/n</span><br><span class="line">    <span class="comment"># r : the number of rows, c: number of columns</span></span><br><span class="line">    r, c = contingency_matrix.shape</span><br><span class="line">    <span class="comment"># phi_corrected : bias corrected phi coefficient</span></span><br><span class="line">    phi_corrected = max(<span class="number">0</span>, phi_coeff-((c<span class="number">-1</span>)*(r<span class="number">-1</span>))/(n<span class="number">-1</span>))</span><br><span class="line">    r_corrected = r-((r<span class="number">-1</span>)**<span class="number">2</span>)/(n<span class="number">-1</span>)</span><br><span class="line">    c_corrected = c-((c<span class="number">-1</span>)**<span class="number">2</span>)/(n<span class="number">-1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.sqrt(phi_corrected/min((c_corrected<span class="number">-1</span>),(r_corrected<span class="number">-1</span>)))</span><br></pre></td></tr></table></figure>
+<p>아래는 위의 함수를 이용하여 연관성을 계산한 히트맵입니다. 훨씬 더 깔끔하고 이해하기 쉽다는 것을 확인할 수 있습니다. 전반적으로 상관관계가 높은 변수들은 없지만, ‘source’ (우물의 원천지)와 ‘waterpoint_type’ (우물을 끌어올리는 펌프의 종류)가 그 중 높은 연관성을 가지고 있다는 것을 확인할 수 있습니다. 또한 관계의 대칭으로 인해 Pearson correlation coefficient와 같이 히트맵이 대칭을 이룬다는 것도 보입니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">columns = water_df.columns</span><br><span class="line">corr = pd.DataFrame(index=columns, columns=columns)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(columns)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(columns)):</span><br><span class="line">        <span class="keyword">if</span> i == j:</span><br><span class="line">            corr[columns[i]][columns[j]] = <span class="number">1.0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            corr[columns[j]][columns[i]] = cramers_v(water_df[columns[i]],water_df[columns[j]])</span><br><span class="line">            corr[columns[i]][columns[j]] = cramers_v(water_df[columns[j]],water_df[columns[i]])</span><br><span class="line">corr.fillna(value=np.nan, inplace=<span class="literal">True</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">6</span>))</span><br><span class="line">sns.heatmap(corr, annot=<span class="literal">True</span>, fmt=<span class="string">'.2f'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_7_0.png" alt="png"></p>
+<h3 id="Theil’s-U-Uncertainty-Coefficient"><a href="#Theil’s-U-Uncertainty-Coefficient" class="headerlink" title="Theil’s U - Uncertainty Coefficient"></a>Theil’s U - Uncertainty Coefficient</h3><p>Theil’s U 또한 두개의 명목형 카테고리 변수간의 연관성 측도이며 정보 엔트로피를 기반으로 계산 합니다.<br><br>그렇다면 또 다른 연관성 측도인 Theil’s U는 Cramér’s V와 어떤 점이 다를까요?<br><br>아래에 예제를 통해 다른점을 알아보겠습니다. 아래의 테이블에서 A라는 카테고리 변수는 색을 나타내고 있고 B에는 사물을 나타냅니다. </p>
+<table align="center" border="2" width="300">
+    <th style="text-align: center;" bgcolor="#ffff80">A</th>
+    <th style="text-align: center;" bgcolor="#ffff80">B</th>
+    <tr>
+        <td style="text-align: center;">빨강</td>
+        <td style="text-align: center;">사과</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">빨강</td>
+        <td style="text-align: center;">장미</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">빨강</td>
+        <td style="text-align: center;">사과</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">초록</td>
+        <td style="text-align: center;">브로콜리</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">초록</td>
+        <td style="text-align: center;">브로콜리</td>
+    </tr>
+        <tr>
+        <td style="text-align: center;">초록</td>
+        <td style="text-align: center;">올리브</td>
+    </tr>
+</table>
+
+<p>만약 우리가 A의 값을 안다고 해도 B의 값을 확실히 알 수 없습니다.</p>
+<p>빨강 &rightarrow; 사과 혹은 장미<br><br>초록 &rightarrow; 브로콜리 혹은 올리브<br></p>
+<p>하지만 반대로 B의 값을 안다면, A의 값을 확실히 알 수 있게 됩니다.</p>
+<p>사과 &rightarrow; 빨강<br><br>장미 &rightarrow; 빨강<br><br>브로콜리 &rightarrow; 초록<br><br>올리브 &rightarrow; 초록<br></p>
+<p>이 정보는 위의 Cramér’s V를 이용하면 두 변수의 관계가 대칭이기 때문에 전혀 알아낼 수가 없기에 비대칭적인 연관성 측도가 필요합니다. 이 측도가 바로 Theil’s U입니다. </p>
+<p>Theil’s U는 Uncertainty Coefficient (불확실성 계수) 라고 부르기도 하며 두 변수 사이의 조건부 엔트로피 (conditional entropy)를 기반으로 계산 됩니다. 쉽게 말해, 변수 A의 값이 알려진다면 어떠한 변수 B의 값들이 나올수 있는지, 얼만큼 나오는지를 조건부 엔트로피로 확인할 수 있습니다. Cramér’s V 와 같이 Theil’s U 또한 0과 1사이의 값을 가지지만 비대칭적인 특성을 가지고 있습니다. 즉 Theil’s U는 두 변수 A와 B의 순서가 바뀌면 조건부 엔트로피로 인하여 $U(A, B) \neq U(B, A)$ 가 되지만 Cramér’s V 의 경우는 대칭이기 때문에 $V(A, B) = V(B, A)$ 가 됩니다. </p>
+<p>아래는 조건부 앤트로피와 Theil’s U를 함수화 했으며, 이 값으로 다시 위의 탄자니아 식수개발사업 관련 데이터에서 가져온 4개의 변수 사이의 연관성을 Theil’s U를 사용하여 히트맵으로 나타내보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> math </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conditional_entropy</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Calculate conditional entropy of "a" given "b"</span></span><br><span class="line"><span class="string">    a : categorical variable</span></span><br><span class="line"><span class="string">    b : another categorical variable</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    b_counter = Counter(b)</span><br><span class="line">    ab_counter = Counter(list(zip(a,b)))</span><br><span class="line">    total = sum(b_counter.values())</span><br><span class="line">    entropy = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ab <span class="keyword">in</span> ab_counter.keys():</span><br><span class="line">        p_ab = ab_counter[ab] / total</span><br><span class="line">        p_b = b_counter[ab[<span class="number">1</span>]] / total</span><br><span class="line"></span><br><span class="line">        entropy += p_ab * math.log(p_b/p_ab)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> entropy</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">theils_u</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Calculate Theil's U between categorical variables a and b</span></span><br><span class="line"><span class="string">    a : categorical variable</span></span><br><span class="line"><span class="string">    b : another categorical variable</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    s_ab = conditional_entropy(a,b)</span><br><span class="line">    a_counter = Counter(a)</span><br><span class="line">    total = sum(a_counter.values())</span><br><span class="line">    p_a = list(map(<span class="keyword">lambda</span> n: n/total, a_counter.values()))</span><br><span class="line">    s_a = sp.stats.entropy(p_a)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> s_a == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_a - s_ab) / s_a</span><br></pre></td></tr></table></figure>
+<p>아래의 히트맵은 위의 Cramér’s V와 다른 인사이트를 보여 줍니다. 예를들어 위와 같이 ‘waterpoint_type’이 주어졌을 때, ‘source’와의 연관성의 강도는 0.40 이지만 ‘source’가 주어졌을 때, ‘waterpoint_type’과의 연관성의 강도는 0.31 으로 대칭이 아님을 확인할 수 있습니다. 즉, ‘waterpoint_type’을 아는 것이 ‘source’에 대해 조금 더 많은 정보를 주지만, ‘source’를 아는 것은 ‘waterpoint_type’를 아는 것에 더 적은 정보를 제공 합니다. 그러므로 Theil’s U가 좀 더 두 변수 간의 관계를 잘 보여준다고 할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">theilu_corr = pd.DataFrame(index=columns, columns=columns)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(columns)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(columns)):</span><br><span class="line">        <span class="keyword">if</span> i == j:</span><br><span class="line">            theilu_corr[columns[i]][columns[j]] = <span class="number">1.0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            theilu_corr[columns[j]][columns[i]] = theils_u(water_df[columns[j]], water_df[columns[i]])</span><br><span class="line">            theilu_corr[columns[i]][columns[j]] = theils_u(water_df[columns[i]], water_df[columns[j]])</span><br><span class="line">            </span><br><span class="line">theilu_corr.fillna(value=np.nan, inplace=<span class="literal">True</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">6</span>))</span><br><span class="line">sns.heatmap(corr, annot=<span class="literal">True</span>, fmt=<span class="string">'.2f'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_13_0.png" alt="png"></p>
+<p>이렇게 해서 카테고리 변수간의 상관관계에 있어서 Cramér’s V 와 Theil’s U에 대해 알아보았습니다. Cramér’s V 와 Theil’s U는 계산이 아주 빠르고 쉽게 이해할 수 있는 인사이트를 제공하므로 더이상 카테고리 변수를 모두 원핫으로 바꾸어 오랜 시간에 걸쳐서 상관관계를 보지 않아도 되겠습니다. 카테고리 변수가 나왔을 때 더 좀 더 풍부한 분석을 해 보시길 바랍니다.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
