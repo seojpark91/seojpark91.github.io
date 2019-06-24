@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="All About Correlation between Categorical Variables - Theil&#39;s U">
+        <meta property="og:title" content="All About Correlation between Categorical Variables - Part 2">
     
 
     <!--Open Graph Description-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>All About Correlation between Categorical Variables - Theil&#39;s U - Seojung&#39;s Daily</title>
+    <title>All About Correlation between Categorical Variables - Part 2 - Seojung&#39;s Daily</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -165,7 +165,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>All About Correlation between Categorical Variables - Theil's U</h1>
+                    <h1>All About Correlation between Categorical Variables - Part 2</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -195,8 +195,7 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h1 id="All-About-Correlation-between-Categorical-Variables-Theil’s-U"><a href="#All-About-Correlation-between-Categorical-Variables-Theil’s-U" class="headerlink" title="All About Correlation between Categorical Variables - Theil’s U"></a>All About Correlation between Categorical Variables - Theil’s U</h1><p>앞에서 알아본 카이제곱 연관성 검정 (chi square test of association)은 두 변수사이의 관계가 통계적으로 유의미한지 (statistically significant)를 알아볼 수 있는 검정이었습니다. 하지만 이 검정을 통해서는 두 변수간의 관계가 얼만큼 중요한지에 대해서는 알려주지 않습니다. </p>
 <h2 id="상관-관계-Correlation-란"><a href="#상관-관계-Correlation-란" class="headerlink" title="상관 관계 (Correlation)란?"></a>상관 관계 (Correlation)란?</h2><p>본론으로 들어가기 전, 간단히 상관 관계 (correlation)에 대해 짚고 넘어갑니다. 상관 관계란 “두 변수간의 관계의 강도” 입니다. 몸무계와 키 사이의 상관 관계나 아파트의 넓이와 가격간의 상관 관계의 강도를 예로 들 수 있습니다. 강한 상관 관계를 예상해볼 수 있습니다.<br>우리가 잘 알고 있는 피어슨 상관 계수 <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient" target="_blank" rel="noopener">Pearson correlation coefficient</a>는 두 연속형 변수 (continuous variable)간의 선형 상관 관계를 나타내는 수치이며 -1과 1사이의 값을 지닙니다. 두 변수간의 피어슨 상관 계수를 계산하는 수식은 아래와 같습니다. 보면 두 변수 (A, B) 의 공분산 Covariance ($\text Cov$) 과 각 변수의 표준편차($\sigma$)가 피어슨 상관 계수 ($\rho$)를 구하는 식에 들어 갑니다.<br><br></p>
-<script type="math/tex; mode=display">\text{Cov}[A, B] = \text{E}[(A - \text{E}[A])(B - \text{E}[B])]$$ <br>
-$$\rho[X,Y] =  \dfrac{\text{Cov}[A, B]}{\sigma_A \cdot \sigma_B}</script><p>하지만 카테고리 변수에서는 평균과 분산의 개념이 존재하지 않습니다. 색을 나타내는 변수가 있을 때, 이 변수의 값들이 빨강, 노랑, 초록이라면 빨강에서 색의 평균을 어떻게 뺄 수 있을까요? 불가능 하다는 것을 바로 확인할 수 있습니다. </p>
+<script type="math/tex; mode=display">\text{Cov}[A, B] = \text{E}[(A - \text{E}[A])(B - \text{E}[B])]</script><script type="math/tex; mode=display">\rho[X,Y] =  \dfrac{\text{Cov}[A, B]}{\sigma_A \cdot \sigma_B}</script><p>하지만 카테고리 변수에서는 평균과 분산의 개념이 존재하지 않습니다. 색을 나타내는 변수가 있을 때, 이 변수의 값들이 빨강, 노랑, 초록이라면 빨강에서 색의 평균을 어떻게 뺄 수 있을까요? 불가능 하다는 것을 바로 확인할 수 있습니다. </p>
 <p>이러한 이슈를 해결하기 위해 좋은 방법은 아니지만 원핫인코딩 (one-hot encoding)으로 카테고리 변수를 변환시킬 수 있습니다. 그 후, 피어슨 상관 계수를 계산합니다. 하지만 이 방법은 아래에서 곧 보겠지만, 분석하기가 아주 힘들어 집니다. 제가 가지고 있는 탄자니아 식수개발사업 관련 데이터에서 4개의 카테고리 변수 ‘water_quality’, ‘quality_group’, ‘quantity’, ‘quantity_group’을 원핫인코딩 하여 히트맵을 통해 상관관계를 나타낸 시도가 아래에 나와있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 불러오고 변수 4개를 선택 합니다</span></span><br><span class="line">df = pd.read_csv(<span class="string">"data/training.csv"</span>, index_col=<span class="string">'id'</span>)</span><br><span class="line">water_df = df[[<span class="string">'water_quality'</span>, <span class="string">'quantity'</span>, <span class="string">'source'</span>, <span class="string">'waterpoint_type'</span>]]</span><br><span class="line">water_df.head()</span><br></pre></td></tr></table></figure>
 <div>
@@ -406,6 +405,22 @@ $$\rho[X,Y] =  \dfrac{\text{Cov}[A, B]}{\sigma_A \cdot \sigma_B}</script><p>하�
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 
 </html>
