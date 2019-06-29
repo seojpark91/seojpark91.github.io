@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="How to Deal with Categorical DataHow to encode categorical variables대부분의 머신 러닝 알고리즘들은 몇몇의 트리 기반 알고리즘을 제외하고는 입력 데이터가 수치형 (numerical values)이여야지만 합니다. 그">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="nominal category feature encoding">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="How to Deal with Categorical DataHow to encode categorical variables대부분의 머신 러닝 알고리즘들은 몇몇의 트리 기반 알고리즘을 제외하고는 입력 데이터가 수치형 (numerical values)이여야지만 합니다. 그">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>nominal category feature encoding - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>nominal category feature encoding</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-06-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="How-to-Deal-with-Categorical-Data"><a href="#How-to-Deal-with-Categorical-Data" class="headerlink" title="How to Deal with Categorical Data"></a>How to Deal with Categorical Data</h1><h2 id="How-to-encode-categorical-variables"><a href="#How-to-encode-categorical-variables" class="headerlink" title="How to encode categorical variables"></a>How to encode categorical variables</h2><p>대부분의 머신 러닝 알고리즘들은 몇몇의 트리 기반 알고리즘을 제외하고는 입력 데이터가 수치형 (numerical values)이여야지만 합니다. 그러므로 카테고리들도 숫자로 변환을 하여야 머신 러닝 알고리즘을 적용할 수 있습니다. 카테고리형 데이터들은 사람이 볼 때에는 쉽게 이해할 수 있지만 컴퓨터는 카테고리 데이터가 주는 정보를 사람처럼 이해할 수 없습니다. 예를들어 우리는 한국이 일본과 가깝다는 것을 알고 아르헨티나는 한국과 멀리 떨어져있다는 것을 알고있지만 컴퓨터의 입장에서는 한국, 일본, 아르헨티나는 그저 “나라”라는 카테고리 피쳐에 있는 3개의 다른 값들 입니다. 카테고리 피쳐에 contextual (문맥/상황적) 정보를 담아 숫자로 바꾸어 주는 전처리 작업에 따라 머신러닝 모델의 성능이 좌지우지 됩니다. 이번 포스팅은 순서 정보가 없는 명목형 카테고리 피쳐 (nominal categorical feature)를 숫자로 나타내는 몇가지 방법에 대해 <a href="https://contrib.scikit-learn.org/categorical-encoding/" target="_blank" rel="noopener">category Encoders 패키지</a>를 통하여 알아보고 이 패키지를 이용하여 scikit learn으로 pipeline을 만드는 방법까지 알아보겠습니다.<br></p>
+<h3 id="Types-of-Encoders"><a href="#Types-of-Encoders" class="headerlink" title="Types of Encoders"></a>Types of Encoders</h3><ol>
+<li><strong>Classic Encoders</strong>: 많이 알고 있으며 자주 사용되는 인코더 들입니다. ordinal, one hot, binary, hashing이 있습니다. 이 부분은 아래에서 다루도록 하겠습니다. </li>
+</ol>
+<ol>
+<li><strong>Bayesian-type Encoders</strong>: Bayesian 인코더는 종속 변수의 정보를 사용하여 인코딩을 합니다. 원핫인코딩 방식처럼 카테고리 변수가 가지고 있는 값의 갯수만큼 피쳐를 생성하는 것이 아니라 카테고리 피쳐에 대응하는 딱 하나의 피쳐만을 생성하기 때문에 cardinality가 아주 높을 때 유용하게 사용됩니다. Bayesian 인코딩 방식에도 여러가지가 있습니다. James-Stein, M-estimator, Target encoding (mean encoding), Leave One Out encoding, Weight of Evidence 이 있는데 모두 category encoders 패키지에 구현이 되어 있습니다. 이 포스팅에서는 제가 사용했던 target encoding (mean encoding)과 Leave One Out encoding에 대해서 다루겠습니다. </li>
+</ol>
+<ol>
+<li><strong>Contrast Encoders</strong>: Contrast encoder들은 주로 명목형 카테고리 변수가 아닌 순서가 있는 카테고리 변수일 때 사용될 수 있습니다. 또한 contrast encoders는 선형 회귀 모형에서 주로 쓰이지만 머신 러닝 알고리즘에서는 쓰이지 않습니다. 각 방법에 대해 아래 간단하게 설명을 달았으나 아래에서 깊게 다루지는 않겠습니다. Contrast encoder의 자세한 설명은 이 <a href="https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank" rel="noopener">웹사이트</a>를 참조하세요.    <ul>
+<li>Helmert : Helmert 인코딩은 카테고리 피쳐에 순서가 있을 때 사용될 수 있습니다. 한 카테고리 값의 “레벨” (순서가 있는 경우)의 종속 변수의 평균이 전 레벨들의 종속 변수 (타겟)값의 평균과 비교되어 표현되는 인코딩 방법 입니다.  </li>
+<li>Sum : sum 인코딩 또한 Helmert 인코딩처럼 카테고리 피쳐에 순서가 있을 때 사용될 수 있습니다. 한 카테고리 값 “레벨”의 종속 변수의 평균을 모든 다른 “레벨”들의 종속 변수의 평균과 비교합니다.  </li>
+<li>Polynomial : Polynomial 인코딩은 특히 순서가 있는 카테고리 변수일 뿐 아니라 그 변수가 가지고 있는 값들의 간격이 일정할 때 사용합니다. 카테고리 값의 갯수에 따라 카테고리 값의 트랜드를 찾습니다. 선형 회귀 모델에서 카테고리 변수에서 트랜드를 찾을 때 주로 사용되는 방법입니다. </li>
+</ul>
+</li>
+</ol>
+<h3 id="1-The-issue-of-high-cardinality-and-one-hot-encoding"><a href="#1-The-issue-of-high-cardinality-and-one-hot-encoding" class="headerlink" title="1. The issue of high cardinality and one hot encoding"></a>1. The issue of high cardinality and one hot encoding</h3><p>탄자니아 식수사업 데이터를 분석하는 과정에서 처음으로 명목형 카테고리 피쳐들의 <strong>high cardinality</strong> 문제를 맞딱드렸습니다. 카테고리 피쳐에 있어 high <a href="https://ko.wikipedia.org/wiki/%EC%A7%91%ED%95%A9%EC%9D%98_%ED%81%AC%EA%B8%B0" target="_blank" rel="noopener">cardinality</a>란 한 카테고리 피쳐 안에 있는 unique한 값의 갯수가 높다는 것을 의미합니다. 아래에 보면 제가 가지고 있는 탄자니아 식수사업 데이터 셋 안에 있는 “funder”, “installer”, “subvillage” 피쳐에는 unique한 값이 천개가 훨씬 넘어간다는 것을 확인할 수 있습니다.<br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load Tanzania water pump dataset</span></span><br><span class="line">df = pd.read_csv(<span class="string">'./data/training.csv'</span>)</span><br><span class="line">target = pd.read_csv(<span class="string">'./data/labels.csv'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># find out how many unique values are in the chosen categorical features</span></span><br><span class="line">high_cardinality_cols = [(<span class="string">"funder"</span> ,df.funder.nunique()),\</span><br><span class="line">                         (<span class="string">"installer"</span>, df.installer.nunique()),\</span><br><span class="line">                         (<span class="string">"subvillage"</span>, df.subvillage.nunique())]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> high_cardinality_cols:</span><br><span class="line">    print(<span class="string">"the number of unique values in &#123;&#125; categorical feature : &#123;&#125;"</span>.format(col[<span class="number">0</span>], col[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>the number of unique values in funder categorical feature : 1897
+the number of unique values in installer categorical feature : 2145
+the number of unique values in subvillage categorical feature : 19287
+</code></pre><p>전체 데이터 갯수가 59,400인데 우리가 흔히 알고 있으며 많이 쓰이는 원핫인코딩 (one hot encoding) 방식으로 모든 카테고리 피쳐들을 전처리 하게 되면 피쳐의 갯수가 상상을 초월할 정도로 많아질 것이라는 것을 알 수 있습니다. 왜냐하면 원핫인코딩 방식은 각 카테고리 값마다 피쳐를 하나씩 생성하기 때문입니다. 이렇게 funder와 installer를 원핫인코딩하여 컬럼갯수를 세어보면 두 피쳐만 넣었는데도 이미 피쳐의 갯수가 4042라는 것을 확인할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(pd.get_dummies(df[[<span class="string">"funder"</span>, <span class="string">"installer"</span>]]).columns)</span><br></pre></td></tr></table></figure>
+<pre><code>4042
+</code></pre><p>원핫인코딩의 <em>장점</em>은 무엇보다 이해하기 쉽고 구현도 쉽다입니다. 또한 한 카테고리 피쳐 안과 (within each category) 카테고리 피쳐들 사이가 (between categories) 가 다 분리되어 있기 때문에 카테고리 사이의 관계에 대한 가정이 없어서 모델에 따라 cardinality가 낮은 경우에는 머신러닝 모델의 성능이 잘 나오기도 합니다.</p>
+<p><em>단점</em>은 위에서 보는 것과 같이 cardinality가 클 때 아주 많은 피쳐(column)를 생성하기 때문에, 메모리 이슈가 생겨 모델 학습이 되지 않거나, 느려지게 합니다. 또한 트리 기반 알고리즘을 적용할 때 원핫인코딩으로 카테고리 값들을 모두 binary 변수로 바꿔주는 것은 좋지 않습니다. 이 이유에 대해서는 따로 포스팅을 하도록 하겠습니다.</p>
+<h3 id="2-Classic-Encoding-Methods"><a href="#2-Classic-Encoding-Methods" class="headerlink" title="2. Classic Encoding Methods"></a>2. Classic Encoding Methods</h3><h4 id="2-1-Ordinal-Encoding"><a href="#2-1-Ordinal-Encoding" class="headerlink" title="2-1 Ordinal Encoding"></a>2-1 Ordinal Encoding</h4><p>ordinal encoding은 카테고리 변수에 있는 값을 정수로 변환해 줍니다. 예를들어 “색”이라는 카테고리 피쳐가 있고, 그 피쳐안에 빨강, 파랑, 초록 이라는 string 값이 있고, 이 값들이 데이터에 나타나는 순서대로 숫자를 지정해 줍니다. 아래를 보면 빨강, 파랑, 초록의 순서대로 값이 등장했기 때문에, 빨강에는 1, 파랑에는 2, 초록에는 3 이라는 값이 지정되었음을 확인할 수 있습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> category_encoders <span class="keyword">as</span> ce</span><br><span class="line"></span><br><span class="line"><span class="comment"># Crate color category feature</span></span><br><span class="line">colors = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">'color'</span>:[<span class="string">"빨강"</span>, <span class="string">"노랑"</span>, <span class="string">"파랑"</span>, <span class="string">"보라"</span>, <span class="string">"초록"</span>, <span class="string">"파랑"</span>, <span class="string">"파랑"</span>, <span class="string">"초록"</span>, <span class="string">"빨강"</span>, <span class="string">"노랑"</span>]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Utilize Ordinal Encoder of category_encoders package to encode color feature with 'fit_transform'</span></span><br><span class="line">ce_ord = ce.OrdinalEncoder(cols = [<span class="string">'color'</span>])</span><br><span class="line">colors[<span class="string">"ordinal_colors"</span>] = ce_ord.fit_transform(colors[<span class="string">'color'</span>])</span><br><span class="line">colors</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>color</th>
+      <th>ordinal_colors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>빨강</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>노랑</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>파랑</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>보라</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>초록</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>파랑</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>파랑</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>초록</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>빨강</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>노랑</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>만약 카테고리 값들이 정말 순서가 있는 값이고 그 순서의 간격이 일정하다면, ordinal encoded된 값을 그대로 사용하는 것이 괜찮을 수 있습니다. 예를들어 카테고리 피쳐의 값이 등수여서 “첫번째”, “두번째”, “세번째” 라는 값을 가지고 있는 경우입니다. 하지만, 대부분의 경우 명목형 카테고리 변수 이거나 순서가 있는 값을 가진 카테고리 변수지만 그 사이 간격이 모호한 경우 (예를들어, Excellent, Good, Fair, Poor)에는 아래에서 소개되는 다른 인코딩 방법을 포함하여 다른 인코딩 방법을 사용해야 합니다. </p>
+<h4 id="2-2-Hashing"><a href="#2-2-Hashing" class="headerlink" title="2-2 Hashing"></a>2-2 Hashing</h4><p>Hashing Encoder는 해싱 트릭(hasing trick)을 적용합니다. <a href="https://en.wikipedia.org/wiki/Hash_function" target="_blank" rel="noopener">해시 함수</a>는 컴퓨터 사이언스에서 기본이 되는데 아주 다양한 형태의 해시 함수가 존재 합니다. 하지만 모든 해시 함수는 딱 하나의 목적을 가지고 있습니다. 모호한 크기의 데이터를 정해진 크기의 데이터로 매핑 (map) 시킵니다. 그리하여 해싱을 적용하면 처음부터 그 카테고리 피쳐에 대한 0 벡터를 생성하게 됩니다. 그래서 해싱은 주로 스팸 필터링 (spam filtering)을 할 때 많이 사용되어지는 방식이었습니다. 왜냐하면 Bag of Words 방법은 vocabulary size가 정해져 있기 때문에 새로운 단어를 맞딱드렸을 때 Out of Vocabulary (OOV) 이슈를 피할 수 없는 반면, 해싱 트릭을 사용하게 되면 처음부터 아주 크기가 큰 0 벡터 (예를 들어 $2^{28}$ 사이즈의 0 벡터)를 만들고 해시 함수를 통해 string값이 통과되면 $0$ 부터 $2^{28}$ 사이의 값을 뱉어 냅니다. 그리하여 어떤 해시 함수를 사용하느냐에 따라 출력값과 출력값의 범위가 정해 지게 됩니다. 예를 들어 “빨강”이라는 값을 해시 함수에 통과시키면 특정한 해시값 (hash)을 인덱스 (키)로 갖게 되고 해당 인덱스에 원핫인코딩처럼 1을 표시합니다.</p>
+<p>category encoders 패키지에 파라미터 값으로 <code>n_components</code>가 있는데 이 값이 0 벡터의 크기를 지정해 줍니다. 그리고 카테고리 변수에 있는 string값을 입력으로 받고 사용자가 <code>n_components</code> 로 지정한 범위 안에서 출력 값을 뱉어주는 <a href="https://en.wikipedia.org/wiki/Hash_function" target="_blank" rel="noopener">해시 함수</a>를 만들어 내거나 선택합니다. catetory encoders 패키지의 hashing encoder는 md5라는 해시 함수를 디폴트로 가지고 있습니다. </p>
+<p>같은 입력 값을 해시 함수에 통과시킨다면, 항상 같은 출력값을 가지게 됩니다. 하지만 <a href="https://en.wikipedia.org/wiki/Collision_(computer_science" target="_blank" rel="noopener">해시 충돌</a>)로 인하여 정보의 손실이 있을 수 있습니다. 해시 충돌이란 다른 입력 값에 대해 같은 출력값을 가지는 상황을 말하는데 이렇게 같은 출력값을 가지게 되는 오버랩 (overlap)상황이 많지 않다면, 모델의 성능에 크게 영향을 주지는 않습니다. 아래는 1897개의 값을 가지고 있는 funder 카테고리 피쳐를 해싱 인코더를 사용하여 64차원으로 변형해보았습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a hashing encoder for the funder column with the number of components = 64</span></span><br><span class="line"><span class="comment"># default hash method is 'md5' user can create his/her own hash function and use that for hash encoder</span></span><br><span class="line">hash_encoder = ce.HashingEncoder(cols = [<span class="string">'funder'</span>], n_components = <span class="number">64</span>)</span><br><span class="line"><span class="comment"># transform the column with the above encoder</span></span><br><span class="line">hash_encoder.fit_transform(df[<span class="string">'funder'</span>]).head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_0</th>
+      <th>col_1</th>
+      <th>col_2</th>
+      <th>col_3</th>
+      <th>col_4</th>
+      <th>col_5</th>
+      <th>col_6</th>
+      <th>col_7</th>
+      <th>col_8</th>
+      <th>col_9</th>
+      <th>...</th>
+      <th>col_54</th>
+      <th>col_55</th>
+      <th>col_56</th>
+      <th>col_57</th>
+      <th>col_58</th>
+      <th>col_59</th>
+      <th>col_60</th>
+      <th>col_61</th>
+      <th>col_62</th>
+      <th>col_63</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 64 columns</p>
+</div>
+
+
+
+<h4 id="2-3-Binary-Encoding"><a href="#2-3-Binary-Encoding" class="headerlink" title="2-3 Binary Encoding"></a>2-3 Binary Encoding</h4><p>바이너리 인코딩은 원핫인코딩과 해싱 인코딩을 섞어놓은 방법이라고 생각할 수 있습니다. 바이너리 인코딩은 원핫인코딩보다 적은 수의 피쳐를 생성해 내지만, 카테고리 피쳐가 가지고 있는 unique한 값들을 어느정도 보존 합니다. 바이너리 인코딩의 목적은 카테고리 변수가 가지고 있는 값의 갯수를 이진수로 바꾸어서 저장합니다. 만약 카테고리 변수에 10개의 값이 있다면, 이 값이 이진수로 변환되어 1010이 됩니다. 그리고 각 자리수가 4개의 분리된 열 (피쳐)이 됩니다. 그러므로 각 카테고리 값이 이진 형태로 열을 가로지르며 인코딩 됩니다. 아래는 위에서 생성한 “색” 피쳐로 바이너리 인코딩을 해 보았습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create binary encoder</span></span><br><span class="line">ce_binary = ce.BinaryEncoder(cols = [<span class="string">'color'</span>])</span><br><span class="line">ce_binary.fit_transform(colors[<span class="string">'color'</span>])</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>color_0</th>
+      <th>color_1</th>
+      <th>color_2</th>
+      <th>color_3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>바이너리 인코딩은 카테고리 피쳐의 cardinality가 높을 때 빛을 발합니다. 일단 원핫인코딩보다 훨씬 더 적은 수의 열을 생성하기 때문에, 메모리에 과부하가 가지 않으며 효율적입니다. 또한 cardinality가 높을 때 종종 일어나는 차원 문제를 해소시켜 주기도 합니다. </p>
+<h3 id="3-Bayesian-type-Encoding-Methods"><a href="#3-Bayesian-type-Encoding-Methods" class="headerlink" title="3. Bayesian-type Encoding Methods"></a>3. Bayesian-type Encoding Methods</h3><h4 id="3-2-Target-Mean-Encoding"><a href="#3-2-Target-Mean-Encoding" class="headerlink" title="3-2 Target (Mean) Encoding"></a>3-2 Target (Mean) Encoding</h4><p>타겟 인코딩은 카테고리 독립 변수의 각 값의 종속 변수의 평균값을 계산합니다. 이러한 방법은 비슷한 카테고리 끼리 비슷한 점이 인코딩 된다는 점과 classic한 인코딩 형식과 달리 계산 속도가 아주 빠른 것이 장점입니다. 예를 들어, 카테고리 변수 $X$ 가 있고 종속 변수 $Y$가 있다면 카테고리 변수 $X$ 에 있는 $x_i$ 값의 상응하는 값 $y_i$ 의 평균을 계산하고 이 값을 $x_i$ 대신으로 사용 합니다. Target encoding의 문제점은 overfitting되기 쉽다는 점입니다. 이러한 점을 방지하기 위해 smoothing factor가 들어가게 되는데, category encoders 패키지의 target_encoder에 <code>smoothing</code> 파라미터에 값을 넣어 regularization을 할 수 있습니다. 또한 <code>min_samples_leaf</code> 파라미터로 평균을 계산할 때 최소한의 데이터 사이즈를 정할 수 있습니다.</p>
+<p>아래는 탄자니아 데이터셋으로 타겟 인코딩을 한 결과입니다. 타겟 인코딩을 하기 전, 타겟 값인 우물의 상태 <code>status_group</code> 는 label encoder로 변환 시켜주어야 하기에 scikit learn의 label encoder를 사용하여 타겟 값을 숫자로 변환시켜 줍니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first, we need to label encode the target variable "status_group"</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df[<span class="string">"status_group"</span>] =target[<span class="string">"status_group"</span>]</span><br><span class="line">df[<span class="string">'status_group'</span>] = le.fit_transform(df[<span class="string">'status_group'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># To make encoded values readable</span></span><br><span class="line">pd.options.display.float_format = <span class="string">'&#123;:.2f&#125;'</span>.format</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target encoder with default parameters</span></span><br><span class="line">ce_target = ce.TargetEncoder(cols = [<span class="string">'funder'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show first 10 values</span></span><br><span class="line">ce_target.fit_transform(df[<span class="string">"funder"</span>], df[<span class="string">'status_group'</span>]).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>funder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.81</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.49</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.79</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>아래는 타겟 인코딩은 앞에서 언급한 두개의 파라미터 <code>min_samples_leaf</code>과  <code>smoothing</code>에 값을 넣어 변환시켜 봅니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Target with min_samples_leaf = 10 and smoothing = 3</span></span><br><span class="line">ce_target_min_leaf_10 = ce.TargetEncoder(cols = [<span class="string">'funder'</span>], min_samples_leaf = <span class="number">10</span>, smoothing = <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show first 10 values</span></span><br><span class="line">ce_target_min_leaf_10.fit_transform(df[<span class="string">"funder"</span>], df[<span class="string">'status_group'</span>]).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>funder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.81</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.49</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.80</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h4 id="3-1-Leave-One-Out-Encoding"><a href="#3-1-Leave-One-Out-Encoding" class="headerlink" title="3-1 Leave One Out Encoding"></a>3-1 Leave One Out Encoding</h4><p>Leave One Out 인코딩은 카테고리 독립 변수의 각 값의 종속 변수의 평균값을 계산한다는 점에서 타겟 인코딩과 같습니다. 하지만 Leave One Out이라는 이름은 training과 test data set에 적용되는 알고리즘이 조금 다르기 때문에 붙여진 이름입니다. training data set에는 현재 데이터 (record 또는 row)의 종속 변수 값을 제외하고 계산하여 아웃라이어의 영향을 감소 시키려 합니다. 또한 overfitting 방지를 위해 가우시안 정규 분포 노이즈를 인코딩 된 값에 training할 때 더해 줄 수 있습니다 (testing data는 그대로 둡니다). 대부분 0.05에서 0.6 사이의 값을 지정해 줍니다. category encoders패키지의 leave one out에서는 이 값이 sigma라는 파라미터로 지정되어 있으며 디폴트는 ‘None’입니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Leave One Out encoder with the sigma value of 0.1</span></span><br><span class="line">ce_loo = ce.LeaveOneOutEncoder(cols = [<span class="string">'funder'</span>])</span><br><span class="line">ce_loo.fit_transform(df[<span class="string">"funder"</span>], df[<span class="string">'status_group'</span>], sigma = <span class="number">0.3</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>funder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.81</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.85</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="Make-a-Prediction-Model-Utilizing-Scikit-Learn-Pipeline"><a href="#Make-a-Prediction-Model-Utilizing-Scikit-Learn-Pipeline" class="headerlink" title="Make a Prediction Model Utilizing Scikit Learn Pipeline"></a>Make a Prediction Model Utilizing Scikit Learn Pipeline</h3><p>이제 직접 탄자니아 데이터셋을 가지고 위에서 언급한 카테고리 피쳐 인코딩 방식들 중 Leave One Out 인코더와 Binary 인코더를 사용하여 카테고리 변수들을 인코딩 하고 logistic regression 예측모델을 만들어 classifiation report까지 만들어 보도록 합니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import data preprocessing file </span></span><br><span class="line"><span class="keyword">from</span> data_preprocessing_final <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># load Tanzania water pump dataset</span></span><br><span class="line">df = pd.read_csv(<span class="string">'./data/training.csv'</span>)</span><br><span class="line">target = pd.read_csv(<span class="string">'./data/labels.csv'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># data preprocessing</span></span><br><span class="line">df = make_meta(df)</span><br><span class="line"></span><br><span class="line">df = df.merge(target, on=<span class="string">'id'</span>, how = <span class="string">'outer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># only predict with 2 classes </span></span><br><span class="line">df_modified = df[df.status_group != <span class="string">'functional needs repair'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"><span class="comment"># label encoding target variable</span></span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df_modified[<span class="string">'status_group'</span>] = le.fit_transform(df_modified[<span class="string">'status_group'</span>])</span><br><span class="line">df_modified.drop(<span class="string">'id'</span>, axis=<span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train test split</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(df_modified.iloc[:,:<span class="number">-1</span>], df_modified.iloc[:,<span class="number">-1</span>],</span><br><span class="line">                                                    stratify=df_modified.iloc[:,<span class="number">-1</span>], </span><br><span class="line">                                                    test_size=<span class="number">0.20</span>, random_state = <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<p>Scikit learn의 make_column_transformer를 사용하여 왼쪽에는 리스트 안에 피쳐를 지정해 주고, 오른쪽에는 지정한 피쳐들에 사용하고자 하는 함수/ 인코더를 적어 줍니다.   </p>
+<p><code>make_column_transformer([피쳐들], 왼쪽에 선택된 피쳐들에 사용하고자 하는 함수/ 인코더)</code></p>
+<p>아래는 완성된 make_column_transformer 입니다. 가지고 있는 피쳐들이 모두 카테고리 변수이기 때문에 특정한 인코딩을 지정한 이유는 없습니다. trial and error로 가장 성능이 높은 방식을 선택했습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> make_column_transformer</span><br><span class="line"><span class="keyword">import</span> category_encoders <span class="keyword">as</span> ce</span><br><span class="line"></span><br><span class="line">preprocess = make_column_transformer(</span><br><span class="line">    ([<span class="string">'extraction_type_class'</span>,<span class="string">'permit'</span>,<span class="string">'waterpoint_type'</span>,<span class="string">'funder'</span>, <span class="string">'installer'</span>,<span class="string">'clustered_space'</span>,<span class="string">'quantity'</span>,\</span><br><span class="line">       <span class="string">'season'</span>,<span class="string">'construction_year'</span>], ce.LeaveOneOutEncoder(sigma=<span class="number">0.05</span>, random_state =<span class="number">42</span>)),</span><br><span class="line">    ([<span class="string">'basin'</span>, <span class="string">'management'</span>,<span class="string">'water_quality'</span>,<span class="string">'source_class'</span>,<span class="string">'amount_tsh'</span>,<span class="string">'gps_height'</span>,<span class="string">'payment'</span>,<span class="string">'public_meeting'</span>],\</span><br><span class="line">     ce.BinaryEncoder())</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>pipeline을 만들어 주고 logistic regression 모델까지 넣어준 후, classification report를 출력합니다.  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> make_pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">model = make_pipeline(</span><br><span class="line">    preprocess,</span><br><span class="line">    LogisticRegression(penalty=<span class="string">'l1'</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>Pipeline(memory=None,
+         steps=[(&#39;columntransformer&#39;,
+                 ColumnTransformer(n_jobs=None, remainder=&#39;drop&#39;,
+                                   sparse_threshold=0.3,
+                                   transformer_weights=None,
+                                   transformers=[(&#39;leaveoneoutencoder&#39;,
+                                                  LeaveOneOutEncoder(cols=None,
+                                                                     drop_invariant=False,
+                                                                     handle_missing=&#39;value&#39;,
+                                                                     handle_unknown=&#39;value&#39;,
+                                                                     random_state=42,
+                                                                     return_df=True,
+                                                                     sigma=0.05,
+                                                                     verbose=0),
+                                                  [&#39;extraction_type_class...
+                                                   &#39;source_class&#39;, &#39;amount_tsh&#39;,
+                                                   &#39;gps_height&#39;, &#39;payment&#39;,
+                                                   &#39;public_meeting&#39;])],
+                                   verbose=False)),
+                (&#39;logisticregression&#39;,
+                 LogisticRegression(C=1.0, class_weight=None, dual=False,
+                                    fit_intercept=True, intercept_scaling=1,
+                                    l1_ratio=None, max_iter=100,
+                                    multi_class=&#39;warn&#39;, n_jobs=None,
+                                    penalty=&#39;l1&#39;, random_state=None,
+                                    solver=&#39;warn&#39;, tol=0.0001, verbose=0,
+                                    warm_start=False))],
+         verbose=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = model.predict(X_test)</span><br><span class="line">print(classification_report(res, y_test))</span><br></pre></td></tr></table></figure>
+<pre><code>              precision    recall  f1-score   support
+
+           0       0.90      0.79      0.84      7347
+           1       0.66      0.82      0.73      3670
+
+    accuracy                           0.80     11017
+   macro avg       0.78      0.80      0.79     11017
+weighted avg       0.82      0.80      0.80     11017
+</code></pre><p>이렇게 해서 여러가지 카테고리 인코더들을 간단하게 알아보고, category encoder를 파이프라인에 적용시켜 모델을 학습시키고 예측까지 하였습니다. 다양한 카테고리 인코더 방식을 사용하여 이제 원핫인코딩 방식에서 벗어나 효율적인 카테고리 인코딩을 하시기 바랍니다.</p>
+<p>Happy Learning!</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
