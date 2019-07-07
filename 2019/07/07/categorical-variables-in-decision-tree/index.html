@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="How do you deal with categorical variables in tree-based models?high cardinality categorical variable and in tree-based model, do they get along well ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="categorical variables in decision tree">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="How do you deal with categorical variables in tree-based models?high cardinality categorical variable and in tree-based model, do they get along well ">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>categorical variables in decision tree - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>categorical variables in decision tree</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-07-07
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="How-do-you-deal-with-categorical-variables-in-tree-based-models"><a href="#How-do-you-deal-with-categorical-variables-in-tree-based-models" class="headerlink" title="How do you deal with categorical variables in tree-based models?"></a>How do you deal with categorical variables in tree-based models?</h1><h3 id="high-cardinality-categorical-variable-and-in-tree-based-model-do-they-get-along-well-with-each-other"><a href="#high-cardinality-categorical-variable-and-in-tree-based-model-do-they-get-along-well-with-each-other" class="headerlink" title="high cardinality categorical variable and in tree-based model, do they get along well with each other?"></a>high cardinality categorical variable and in tree-based model, do they get along well with each other?</h3><p>지난번 포스팅 <a href="https://seojpark91.github.io/2019/06/29/nominal-category-feature-encoding/">‘nominal category feature encoding’</a>에서 원핫 인코딩의 단점과, 카테고리 변수를 인코딩 하는 원핫인코딩 이외의 방법들에 대해 알아보았습니다. 원핫인코딩의 단점 중 하나가 트리 기반 모델을 적용할 때 cardinality 가 높은 카테고리 변수를 원핫인코딩으로 변환 시키는 것이 트리 기반 모델의 성능 저하를 야기한다는 점이었습니다. 이 문제에 대해서 자세히 다뤄봅니다.</p>
+<p>모든 트리 기반 모델 알고리즘에는 분류 알고리즘이 있습니다. 이 분류 알고리즘은 데이터셋에서 하나의 독립 변수를 선택하고 그 변수에 대한 기준값을 정하여, 그 기준값에 의해 데이터셋을 두개의 그룹으로 분류합니다. 이 알고리즘은 모든 독립 변수에 대한 가능한 값들을 기반으로 모든 분류 방법을 찾아 내고, 그 안에서 최적의 분류 규칙을 찾아 냅니다. 이 규칙은 분류 알고리즘이 impurity (불순도)나 entropy를 가장 낮출 수 있는 방향으로 분류를 할 수 있도록 해 줍니다. </p>
+<p>연속 변수를 통해 데이터셋이 분류 될 때, 기준값으로 선택될 수 있는 값들은 아주 다양할 것입니다. 그 결과로 대부분의 경우, 트리는 양 방향으로 자라날 수 있습니다. 그 반면, 카테고리 변수는 자연스럽게 트리 기반 모델에서 불리합니다. 그 이유는, 분류가 될 때 기준값이 될 값들이 많이 없기 때문입니다. 상황은 카테고리 변수가 원핫인코딩이 될 때 악화 됩니다. 왜냐하면 트리는 0과 1이라는 값 밖에 없기 때문에 한 방향으로만 계속 자라날 것이기 때문이죠. 트리는 0을 가지는 값을 가지는 쪽으로만 쭉쭉 자라 납니다. </p>
+<p><img src="figure_1_color_table.png" alt="drawing" width="350"><br><img src="figure_2_color_tree.png" alt="drawing" width="450"></p>
+<p>즉, k개의 값(및 레벨)을 가지고 있는 카테고리 변수가 있을 때, 트리는 $\frac{2^{k}}{2} -1$ 가지의 분류 가능성 중 한가지를 택해야 합니다. 물론 카테고리 레벨이 많자 않다면, 연속 변수와 겨룰만 하겠지만, k가 천이 훨씬 넘어가는 숫자가 된다면, 트리 알고리즘은 더미 변수 중 하나를 트리의 루트에 가까운 분류 변수로 선택하지 않을 것입니다. 연속 변수를 선택하는 것이 훨씬 이득이 되겠지요. </p>
+<p>위의 내용을 정리해 보면 트리 기반 모델에서 카테고리 변수를 원핫인코딩 함에 있어서 2가지 문제점이 있습니다:</p>
+<ol>
+<li>원핫인코딩이 야기하는 <a href="https://ko.wikipedia.org/wiki/%ED%9D%AC%EC%86%8C%ED%96%89%EB%A0%AC" target="_blank" rel="noopener">sparsity</a>는 무조건 연속 변수의 변수 중요도가 높게 나오도록 합니다.</li>
+<li>분류 알고리즘의 관점에서 봤을 때, 모든 원핫인코딩된 카테고리 변수는 독립적입니다. 만약 트리가 하나의 원핫인코딩된 하나의 변수로 분류를 한다고 한다면, 정보량 (information gain)이 적기에 entropy/impurity를 크게 낮추지 못합니다. 그 결과로, 트리는 원핫인코딩된 변수를 선택할 확률이 낮습니다. </li>
+</ol>
+<hr>
+<p>아래는 실제 데이터에서 높은 cardinality를 가지고 있는 카테고리 변수 3개를 뽑아 한 모델은 원핫인코딩을 사용을 하였고, 다른 모델은 바이너리 인코딩 방법을 사용하였습니다. 모든 것을 같게 두고 인코딩 방식만 바꾸었을 떄, 성능의 차이가 얼마나 나는지 확인해 보겠습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> make_pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">import</span> lightgbm</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> make_column_transformer</span><br><span class="line"><span class="keyword">import</span> category_encoders <span class="keyword">as</span> ce</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import data preprocessing file </span></span><br><span class="line"><span class="keyword">from</span> data_preprocessing_final <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># load Tanzania water pump dataset</span></span><br><span class="line">df = pd.read_csv(<span class="string">'./data/training.csv'</span>)</span><br><span class="line">target = pd.read_csv(<span class="string">'./data/labels.csv'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># data preprocessing</span></span><br><span class="line">data = make_meta(df)</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="One-Hot-Encoding-with-high-cardinality-features-‘funder’-‘installer’-’clustered-space’"><a href="#One-Hot-Encoding-with-high-cardinality-features-‘funder’-‘installer’-’clustered-space’" class="headerlink" title="One Hot Encoding with high cardinality features ‘funder’ ‘installer’,’clustered_space’"></a>One Hot Encoding with high cardinality features ‘funder’ ‘installer’,’clustered_space’</h4><ul>
+<li>funder, installer에는 500여개의 값, clustered_space에는 약 2600여개의 값이 있습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">'funder'</span>].nunique(), data[<span class="string">'installer'</span>].nunique(), data[<span class="string">'clustered_space'</span>].nunique()</span><br></pre></td></tr></table></figure>
+<pre><code>(528, 521, 2618)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># choose only 'funder', 'installer','clustered_space' columns which have high cardinality</span></span><br><span class="line">df = data[[<span class="string">'id'</span>,<span class="string">'funder'</span>, <span class="string">'installer'</span>,<span class="string">'clustered_space'</span>]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ohe_df = pd.get_dummies(df)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ohe_df = ohe_df.merge(target, on=<span class="string">'id'</span>, how = <span class="string">'outer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># only predict with 2 classes </span></span><br><span class="line">df_modified = ohe_df[ohe_df.status_group != <span class="string">'functional needs repair'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># label encoding target variable</span></span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df_modified[<span class="string">'status_group'</span>] = le.fit_transform(df_modified[<span class="string">'status_group'</span>])</span><br><span class="line">df_modified.drop(<span class="string">'id'</span>, axis=<span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train test split</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(df_modified.iloc[:,:<span class="number">-1</span>], df_modified.iloc[:,<span class="number">-1</span>],</span><br><span class="line">                                                    stratify=df_modified.iloc[:,<span class="number">-1</span>], </span><br><span class="line">                                                    test_size=<span class="number">0.20</span>, random_state = <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = lightgbm.LGBMClassifier(n_estimators = <span class="number">500</span>, </span><br><span class="line">                        max_depth=<span class="number">20</span>, </span><br><span class="line">                        random_state = <span class="number">42</span>,</span><br><span class="line">                       class_weight = <span class="string">'balanced'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.fit(X_train, y_train)</span><br><span class="line">res = model.predict(X_test)</span><br><span class="line">print(classification_report(res, y_test))</span><br></pre></td></tr></table></figure>
+<pre><code>              precision    recall  f1-score   support
+
+           0       0.66      0.76      0.70      5613
+           1       0.70      0.59      0.64      5404
+
+    accuracy                           0.67     11017
+   macro avg       0.68      0.67      0.67     11017
+weighted avg       0.68      0.67      0.67     11017
+</code></pre><hr>
+<h4 id="Binary-Encoding-with-high-cardinality-features-‘funder’-‘installer’-’clustered-space’"><a href="#Binary-Encoding-with-high-cardinality-features-‘funder’-‘installer’-’clustered-space’" class="headerlink" title="Binary Encoding with high cardinality features ‘funder’, ‘installer’,’clustered_space’"></a>Binary Encoding with high cardinality features ‘funder’, ‘installer’,’clustered_space’</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df_be = df.merge(target, on=<span class="string">'id'</span>, how = <span class="string">'outer'</span>)</span><br><span class="line"><span class="comment"># only predict with 2 classes </span></span><br><span class="line">df_modified_be = df_be[df_be.status_group != <span class="string">'functional needs repair'</span>]</span><br><span class="line"></span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df_modified_be[<span class="string">'status_group'</span>] = le.fit_transform(df_modified_be[<span class="string">'status_group'</span>])</span><br><span class="line">df_modified_be.drop(<span class="string">'id'</span>, axis=<span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train test split</span></span><br><span class="line">X_train_be, X_test_be, y_train_be, y_test_be = train_test_split(df_modified_be.iloc[:,:<span class="number">-1</span>], df_modified_be.iloc[:,<span class="number">-1</span>],</span><br><span class="line">                                                    stratify= df_modified_be.iloc[:,<span class="number">-1</span>], </span><br><span class="line">                                                    test_size=<span class="number">0.20</span>, random_state = <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preprocess = make_column_transformer(</span><br><span class="line">    ([<span class="string">'funder'</span>, <span class="string">'installer'</span>,<span class="string">'clustered_space'</span>], ce.BinaryEncoder()))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model_be = make_pipeline(</span><br><span class="line">    preprocess,</span><br><span class="line">    lightgbm.LGBMClassifier(n_estimators = <span class="number">500</span>, </span><br><span class="line">                        max_depth=<span class="number">20</span>, </span><br><span class="line">                        random_state = <span class="number">42</span>,</span><br><span class="line">                       class_weight = <span class="string">'balanced'</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model_be.fit(X_train_be, y_train_be)</span><br><span class="line">res = model_be.predict(X_test_be)</span><br><span class="line">print(classification_report(res, y_test_be))</span><br></pre></td></tr></table></figure>
+<pre><code>              precision    recall  f1-score   support
+
+           0       0.71      0.78      0.74      5817
+           1       0.72      0.64      0.68      5200
+
+    accuracy                           0.71     11017
+   macro avg       0.72      0.71      0.71     11017
+weighted avg       0.71      0.71      0.71     11017
+</code></pre><ul>
+<li>바이너리 인코딩을 했을 때 4%의 성능 향상이 있다는 것을 확인할 수 있습니다. 어떤 모델을 사용하느냐에 따라 다르겠지만, 트리의 특성상 cardinality가 아주 높은 카테고리 변수에서는 원핫 인코딩보다는 다른 인코딩 방식을 사용하는 것이 성능 향상에 도움이 될 것입니다. </li>
+</ul>
+<p>side note : 경험적으로 바이너리 인코딩 방식이 높은 cardinality에 좋다고 알려져 있지만 모델과 데이터에 따라 다를 것입니다</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+
+</html>
