@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Text Classification using Convolutional Neural NetworkImplementing a CNN for Text Classification in Pytorch이번 blog post에서는 Pytorch로 Text Classificatio">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Text Classification using Convolutional Neural Network">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Text Classification using Convolutional Neural NetworkImplementing a CNN for Text Classification in Pytorch이번 blog post에서는 Pytorch로 Text Classificatio">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>Text Classification using Convolutional Neural Network - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Text Classification using Convolutional Neural Network</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-07-14
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/deep-learning-CNN-NLP/">#deep learning, CNN, NLP</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/deep-learning/">deep learning</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Text-Classification-using-Convolutional-Neural-Network"><a href="#Text-Classification-using-Convolutional-Neural-Network" class="headerlink" title="Text Classification using Convolutional Neural Network"></a>Text Classification using Convolutional Neural Network</h1><h2 id="Implementing-a-CNN-for-Text-Classification-in-Pytorch"><a href="#Implementing-a-CNN-for-Text-Classification-in-Pytorch" class="headerlink" title="Implementing a CNN for Text Classification in Pytorch"></a>Implementing a CNN for Text Classification in Pytorch</h2><p>이번 blog post에서는 Pytorch로 Text Classification Task를 Convolution Neural Network (CNN)으로 구현해 봅니다. 데이터는 2019년 초에 competition이 끝난 Kaggle의 <a href="https://www.kaggle.com/c/quora-insincere-questions-classification" target="_blank" rel="noopener">Quora Insincere Questions Classification</a>를 사용해 보았습니다. 구현하기 전, convolution filter와 영상/이미지에서 쓰이던 CNN이 text classification에서는 어떻게 사용이 되는지 설명합니다. </p>
+<h3 id="1-Convolution-Neural-Network-CNN-Key-Points"><a href="#1-Convolution-Neural-Network-CNN-Key-Points" class="headerlink" title="1. Convolution Neural Network (CNN) Key Points"></a>1. Convolution Neural Network (CNN) Key Points</h3><h4 id="1-1-Convolution-Filter-Kernel"><a href="#1-1-Convolution-Filter-Kernel" class="headerlink" title="1-1. Convolution Filter (Kernel)"></a>1-1. Convolution Filter (Kernel)</h4><p>딥러닝이 없던 시절부터 영상/이미지 관련 업무에서 <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing" target="_blank" rel="noopener">Convolution Filter (Kernel)</a>)는 존재 했습니다. 영상/이미지 처리를 하는데에 있어서 대표적으로 object detection 이나 image classification task가 있습니다. 이러한 일들을 하고자 할 때 영상/이미지에 있는 물체의 형태를 추출해야 했습니다. 물체의 형태를 추출할 때 가장 중요한 것은 edge를 추출해 내는 것입니다. 그리하여 딥러닝 전에는 사람이 직접 edge detection을 할 수 있는 convolution filter를 만들었습니다. 각 주어진 목표에 맞는 filter를 만들어서 그림과 filter를 연산을 하면 edge가 나오게 되고, 이 edge를 가지고 주어진 task에 사용을 했습니다. 이러한 전처리 과정, 주어진 task에 맞는 filter를 만드는 과정, 을 거쳐야 비로소 주어진 task를 할 수 있었습니다. CNN은 어떻게 다를까요?</p>
+<h4 id="1-2-How-CNN-has-made-our-lives-easier"><a href="#1-2-How-CNN-has-made-our-lives-easier" class="headerlink" title="1-2. How CNN has made our lives easier?"></a>1-2. How CNN has made our lives easier?</h4><p>CNN도 하는 것은 같습니다. 즉, convolution filter를 사용한다는 점에서 같습니다. 다른점은 CNN은 사람이 직접 전처리 과정을 거쳐서 filter를 얻어내는 것이 아닌 저절로 이 convolution filter를 배웁니다. 출력을 만들어 내기 위해 CNN은 gradient descent, 즉 최적화를 통해 주어진 목표에 맞는 filter의 구성을 배웁니다. 예를 들어 자동차를 구별해 내는 image classification 문제가 있습니다. 이 문제를 해결 하기 위해 필요한 필터를 CNN이 자동적으로 찾아 줍니다. 자동차를 검출하는데 훈련이 된 필터를 새로 입력받은 자동차 이미지에 사용하면 자동차가 검출되는 방향으로 작동하고, 우리가 원하는 “이 그림은 자동차 입니다”라는 답이 나오게 됩니다. 즉, CNN이 자동적으로 패턴을 인식/검출하기 위한 filter를 훈련을 통하여 구성해 줍니다. </p>
+<p>또한 fully connected layer와 달리, convolution layer는 위치 정보를 고려합니다. 이미지에서는 각 픽셀이 인접해 있는 픽셀들과 인과관계를 가지고 연결되어 있기 때문에 위치 정보를 고려해야 합니다. 하지만 fully connected layer는 모든 경우의 수를 다 곱하기 때문에 위치나 노드 간의 순서를 고려하지 않습니다. 즉, fully connected layer에서 이미지 맨 왼쪽 픽셀이 맨 오른쪽 픽셀을 고려하는 것과 다르게 convolution layer는 근처의 픽셀들만 고려하게 되고, 그렇기에 배워야 하는 파라미터의 수가 줄어듭니다. 그런 방면 단점은 입력 사이즈와 출력 사이즈 계산이 복잡합니다. layer를 깊게 쌓으려고 할 때, kernel size, padding size, stride size를 맞춰주지 않으면 에러가 나기에 잘 계산을 해야 합니다.  </p>
+<h4 id="1-3-Max-Pooling"><a href="#1-3-Max-Pooling" class="headerlink" title="1-3 Max Pooling"></a>1-3 Max Pooling</h4><p>Down sampling 기법 중 하나 입니다. 이름에서 알 수 있듯이 filter를 거친 출력 값에서 가장 큰 값을 가져옵니다. 그 자리의 값이 높다는 것은 그 위치의 pattern과 잘 맞았다는 것이기 떄문입니다. 이렇게 큰 값을 가져오기 때문에 max pooling을 하면 위치 정보를 잃어버리지만 패턴 인식에는 가장 좋은 방법입니다. 아래 1-4에서 그림으로 부가 설명을 하겠습니다. </p>
+<h4 id="1-4-CNN-for-Text-Classification"><a href="#1-4-CNN-for-Text-Classification" class="headerlink" title="1-4. CNN for Text Classification?"></a>1-4. CNN for Text Classification?</h4><p>이런 CNN이 text classification에는 어떻게 쓰일 수 있을까요? 2014년 Yoon Kim 교수님께서 <a href="https://aclweb.org/anthology/D14-1181" target="_blank" rel="noopener">Convolutional Neural Networks for Sentence Classification</a>라는 논문으로 처음 알려진 CNN for text classification입니다. 이미지에서 CNN이 패턴을 인식/검출하기 위한 filter를 구성하듯, text classification에서는 각 문장의 label에 맞는 패턴을 찾아내는 필터를 만듭니다. 다시 말해 CNN은 문장이 어떤 단어, 구 또는 절이 나타는지에 대한 패턴에 따라 그 문장의 label에 맞는 convolution filter를 배웁니다. 예를 들어, “배송이 정말 빠른 것 같아요. 아주 만족합니다.” 라는 문장이 있고, 이 문장의 label이 긍정일 때, CNN은 문장을 훑으면서 패턴을 찾아냅니다. ‘“만족합니다”가 들어가면 긍정이구나!’ 라는 것을 CNN이 배우고, “만족합니다”를 찾는 filter를 구성하게 됩니다. </p>
+<p><img src="figure_1_text_classification.png" alt="drawing" width="900"></p>
+<p>위의 그림에서는 각 단어가 embedding layer를 통과한 후의 문장을 시작으로 합니다. 찾고자 하는 패턴의 단어 갯수 만큼 convolution filter의 window size를 CNN 모델을 만들 때 결정 합니다 (위 그림에서는 2단어, 3단어, 4단어의 패턴을 찾습니다). convolution filter는 문장을 훑게 되는데, 2단어의 패턴을 찾는 filter라면 두 단어 씩 element wise multiplication을 하게 됩니다. 이 filter의 사이즈는 |number of filters, window size, embedding vector size|가 되며, 필터의 갯수 (number of filters)또한 embedding vector size와 window size와 같이 hyper parameter입니다. 그렇게 해서 2단어, 3단어, 4단어의 패턴을 찾는 convolution filter를 통과한 output들은 max pooling을 통해 각 필터 갯수별로 가장 큰 값이 하나씩 나오게 됩니다. 이 말은, “주어진 문장이 주어진 패턴에 대해 몇점정도 하는가?”이므로 패턴에 대한 각 문장의 점수라고 할 수 있습니다. 그 후, fully connected layer (linear layer)를 통과 시키고, softmax (binary인 경우 sigmoid)를 씌운 출력값 ($\hat{y}$) 은 각 클래스 별 확률 값을 줍니다. </p>
+<h3 id="2-Implementing-a-CNN-with-Quora-data"><a href="#2-Implementing-a-CNN-with-Quora-data" class="headerlink" title="2. Implementing a CNN with Quora data"></a>2. Implementing a CNN with Quora data</h3><ul>
+<li>필요한 library를 import합니다. torchtext는 NLP task를 좀 더 쉽게 할 수 있게 해주므로, data preparation에는 torchtext를 쓰는 것이 아주 편합니다. tokenizing은 <a href="https://spacy.io/" target="_blank" rel="noopener">spacy</a> library를 통해서 합니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> spacy <span class="comment"># for tokenizing</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torchtext <span class="keyword">import</span> data, datasets</span><br><span class="line"><span class="keyword">from</span> torchtext.data <span class="keyword">import</span> Field</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-Data-Preparation"><a href="#2-1-Data-Preparation" class="headerlink" title="2-1 Data Preparation"></a>2-1 Data Preparation</h4><ul>
+<li>데이터를 준비하는 과정입니다. 첫번째로 torchtext.data의 Field로 Text와 Label을 어떤 datatype으로 할 것인지를 지정해 줍니다. Text의 경우, 여기서 <code>sequential</code> 한 데이터인지 (문장이므로 True), <code>batch_first</code>는 batch dimension을 처음으로 둘 것인지 입니다. 예를 들어, 문장이 들어갈 때 |문장| = (batch_size, length)과 같이, batch size가 처음에 나오도록 해 줍니다. 이렇게 하는 것이 intuitive하고 다루기 쉬우므로 True로 지정합니다. <code>tokenize</code>는 tokenizer를 지정해 줄 수 있는데 저의 경우, spacy를 통해서 tokenizing을 합니다. <code>include_lengths</code>는 각 문장의 length를 같이 주는 항목이라 optional입니다. 저는 문장 길이 확인 차원에서 True로 지정해 주었습니다. 이 밖에도 다양한 parameter들을 지정할 수 있으니, 직접 하나하나 보면서 task에 맞는 parameter들을 지정하면 됩니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TEXT = Field(sequential=<span class="literal">True</span>,</span><br><span class="line">             batch_first=<span class="literal">True</span>,</span><br><span class="line">             tokenize=<span class="string">"spacy"</span>,</span><br><span class="line">             use_vocab=<span class="literal">True</span>,</span><br><span class="line">            include_lengths=<span class="literal">True</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># label의 datatype을 integer라도 꼭 float으로 지정을 해 주어야 에러가 나지 않습니다</span></span><br><span class="line">LABEL = data.LabelField(dtype=torch.float)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>datafields를 지정합니다. 제가 가지고 있는 quora는 tabular data로 qid, question_text, target이렇게 3개의 column이 존재하는데 qid는 질문의 id값이므로 모델에 넣을 필요가 없으므로 None이라고 지정했습니다. question_text는 위 Field에서 지정한 TEXT이고 target 또한 위에서 지정한 Label이기 떄문에 datafield를 아래와 같이 지정해 주고, train set과 validation set을 만들어 줍니다. 저의 train set과 validation set은 data directory안에 있으므로 path를 지정해 줍니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">datafields = [(<span class="string">"qid"</span>, <span class="literal">None</span>),(<span class="string">"question_text"</span>, TEXT),(<span class="string">"target"</span>, LABEL)]</span><br><span class="line">train ,val = data.TabularDataset.splits(path=<span class="string">'/data'</span>, </span><br><span class="line">                                       train=<span class="string">'train_cnn.csv'</span>, </span><br><span class="line">                                       validation=<span class="string">'val_cnn.csv'</span>, </span><br><span class="line">                                       format=<span class="string">'csv'</span>,</span><br><span class="line">                                      fields=datafields)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>train set과 validation set의 크기를 출력해 봅니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(train), len(val)</span><br></pre></td></tr></table></figure>
+<pre><code>(914286, 391838)
+</code></pre><ul>
+<li>그 후, train set에 대해 <code>build_vocab</code>으로 단어와 index사이의 mapping을 시켜 줍니다. 주어진 단어가 어느 index에 있는지, 주어진 index에 해당하는 단어가 무엇인지 파악할 수 있습니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build vocabulary</span></span><br><span class="line">TEXT.build_vocab(train)</span><br><span class="line">LABEL.build_vocab(train)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check index of the word 'Korea' (stoi: string to index)</span></span><br><span class="line">print(TEXT.vocab.stoi[<span class="string">'Korea'</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>576
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check the index 908's word (itos: index to string)</span></span><br><span class="line">print(TEXT.vocab.itos[<span class="number">908</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>practice
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vocabulary size</span></span><br><span class="line">len(TEXT.vocab)</span><br></pre></td></tr></table></figure>
+<pre><code>261329
+</code></pre><ul>
+<li>index가 주어지면 word를 볼 수 있도록, decoding dictionary를 만듭니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict_decode = &#123;idx: keyword <span class="keyword">for</span> keyword, idx <span class="keyword">in</span> TEXT.vocab.stoi.items()&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이제 위에서 준비된 데이터로 Iterator를 만들어 줍니다. Iterator를 통해서 batch size 로 데이터를 쪼개어 batch단위로 학습할 수 있게 해 줍니다. <code>device</code>를 설정하여 gpu에서 훈련시킬 것인지, cpu에서 훈련시킬 것인지를 지정할 수 있습니다. batch size는 64로 지정을 해 주었고, batch 안에서 길이 별로 학습을 할 수 있도록 <code>sort_key</code> parameter를 통해 길이별로 sorting을 했습니다. 이렇게 길이별로 sorting을 해야 비슷한 길이를 가진 문장 끼리 학습이 되기 때문에 학습 속도가 훨씬 빠릅니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</span><br><span class="line">BATCH_SIZE = <span class="number">64</span></span><br><span class="line"></span><br><span class="line">train_iter, val_iter = data.BucketIterator.splits(</span><br><span class="line">    (train, val), </span><br><span class="line">    batch_size = BATCH_SIZE, </span><br><span class="line">    device = device,</span><br><span class="line">    sort_key=<span class="keyword">lambda</span> data:len(data.question_text)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-Make-a-CNN-model"><a href="#2-2-Make-a-CNN-model" class="headerlink" title="2-2. Make a CNN model"></a>2-2. Make a CNN model</h4><ul>
+<li>CNNTextClassifier class를 만들어 줍니다. 이 Classifier는 nn.Module을 상속 받습니다. </li>
+<li>constructor에는 input_size (vocabulary size가 들어갑니다), word embedding vector 사이즈인 word_vec_dim (word vector dimension), pad_index (각 문장에 대해 padding을 넣어 줍니다), n_classes (label에 몇개의 class가 있는지), n_filters (필터의 갯수), window_sizes (찾고자 하는 패턴의 갯수를 list형태로 넣어 줍니다).</li>
+<li>위 그림을 통해 설명한 대로, <code>forward</code> 함수가 구성되어 있습니다. 특별히 언급할 점은, embedding layer와 convolution layer들을 통과한 후, batch normalization을 해 주었습니다. 김기현 강사님의 수업을 들으면서 <a href="https://en.wikipedia.org/wiki/Batch_normalization" target="_blank" rel="noopener">batch normalization</a>은 hyper parameter가 필요 없고, 수렴이 빠르며, 성능 향상이 좋아진다라는 말씀을 하셨기 때문입니다. Batch normalization은 training할 때, mini batch내의 평균과 분산을 구하여 output을 standardization을 통해 unit gaussian으로 만들어 줍니다. 염두해 두어야 할 점은, training과 testing에서 다르게 동작한다는 점입니다. testing에서는 훈련하여 얻은 전체 training set의 평균을 가지고 동작을 하게 됩니다. Batch normalization을 한 후, non-linearity function (ReLU) 을 통과시켜 줍니다. Batch normalization이 왜 잘 작동하는 지는 아직 연구 중에 있다고 합니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNNTextClassifier</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,</span></span></span><br><span class="line"><span class="function"><span class="params">                 input_size, </span></span></span><br><span class="line"><span class="function"><span class="params">                 word_vec_dim, </span></span></span><br><span class="line"><span class="function"><span class="params">                 pad_idx,</span></span></span><br><span class="line"><span class="function"><span class="params">                 n_classes, </span></span></span><br><span class="line"><span class="function"><span class="params">                 n_filters=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 window_sizes=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span>:</span></span><br><span class="line">        </span><br><span class="line">        self.input_size = input_size</span><br><span class="line">        self.word_vec_dim = word_vec_dim</span><br><span class="line">        self.n_classes = n_classes</span><br><span class="line">        self.n_filters = n_filters</span><br><span class="line">        self.window_sizes = window_sizes</span><br><span class="line">        </span><br><span class="line">        super().__init__()</span><br><span class="line">        </span><br><span class="line">        self.emb = nn.Embedding(input_size, word_vec_dim, padding_idx = pad_idx)</span><br><span class="line">        </span><br><span class="line">        self.conv2 = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=n_filters, </span><br><span class="line">                               kernel_size=(self.window_sizes[<span class="number">0</span>], word_vec_dim))</span><br><span class="line">        self.conv3 = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=n_filters,</span><br><span class="line">                              kernel_size=(self.window_sizes[<span class="number">1</span>], word_vec_dim))</span><br><span class="line">        self.conv4 = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=n_filters,</span><br><span class="line">                              kernel_size=(self.window_sizes[<span class="number">2</span>], word_vec_dim))</span><br><span class="line">        </span><br><span class="line">        self.relu = nn.ReLU()</span><br><span class="line">        <span class="comment"># batch normalization applied before nonlinearity</span></span><br><span class="line">        self.batchnorm = nn.BatchNorm2d(num_features=<span class="number">100</span>)</span><br><span class="line">        self.generator = nn.Linear(<span class="number">3</span> * n_filters, n_classes)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># |x| = (batch_size, length)</span></span><br><span class="line">        embedded_text = self.emb(text[<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># |x| = (batch_size, length, word_vec_dim)</span></span><br><span class="line">        </span><br><span class="line">        embedded_text = embedded_text.unsqueeze(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># |x| = (batch_size, 1, length, word_vec_dim)</span></span><br><span class="line">        </span><br><span class="line">        cnn_2_out = self.relu(self.batchnorm(self.conv2(embedded_text)))</span><br><span class="line">        cnn_3_out = self.relu(self.batchnorm(self.conv3(embedded_text)))</span><br><span class="line">        cnn_4_out = self.relu(self.batchnorm(self.conv4(embedded_text)))</span><br><span class="line">        outs = [cnn_2_out, cnn_3_out, cnn_4_out]</span><br><span class="line">        print(cnn_2_out.shape, cnn_3_out.shape, cnn_4_out.shape)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># |x| = (batch_size, n_filter, length - window_size + 1, 1)</span></span><br><span class="line">        cnn_outs = []</span><br><span class="line">        <span class="keyword">for</span> out <span class="keyword">in</span> outs:</span><br><span class="line">            cnn_out = nn.functional.max_pool1d(input=out.squeeze(<span class="number">-1</span>), kernel_size=out.size(<span class="number">-2</span>)).squeeze(<span class="number">-1</span>)</span><br><span class="line">            cnn_outs += [cnn_out]</span><br><span class="line">            print(cnn_out.shape)</span><br><span class="line">        y = self.generator(torch.cat(cnn_outs, dim = <span class="number">-1</span>))</span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-Training"><a href="#2-3-Training" class="headerlink" title="2-3. Training"></a>2-3. Training</h4><ul>
+<li>model을 만들어 줍니다. input size는 vocabulary의 사이즈, word vector dimension은 100, n_classes는 binary classification이기 때문에 sigmoid를 씌워서 하나의 값이 나오므로 1로 지정합니다.  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># padding index is passed to a model</span></span><br><span class="line">PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]</span><br><span class="line"></span><br><span class="line"><span class="comment"># build a model</span></span><br><span class="line">model = CNNTextClassifier(input_size = len(TEXT.vocab), word_vec_dim = <span class="number">100</span>, n_classes = <span class="number">1</span>, pad_idx = PAD_IDX)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Optimizer는 Adam을 선택했고, loss function은 sigmoid와 binary cross entropy loss를 합친 <code>BCEWithLogitsLoss</code>를 썼습니다. 그 후, 이 둘을 계산할 수 있는 device로 보냅니다 (gpu or cpu). </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"></span><br><span class="line">optimizer = optim.Adam(model.parameters())</span><br><span class="line"></span><br><span class="line">criterion = nn.BCEWithLogitsLoss()</span><br><span class="line"></span><br><span class="line">model = model.to(device)</span><br><span class="line">criterion = criterion.to(device)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Quora Insincere Questions Classification data는 imbalanced data로 전체의 6% 만이 insincere question입니다. 그리하여 metric또한 f1 score로 성능을 측정합니다.</li>
+<li>scikit-learn의 f1 score metric으로 성능을 평가합니다. 여기서 주의할 점은 제가 training을 시킬 당시에는 scikit learn이 gpu에서 연산이 되지 않아 이 부분은 cpu에서 연산을 해야 하기 때문에 <code>.cpu()</code>를 넣어 주었습니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1score</span><span class="params">(preds, target, sample_weight=None)</span>:</span></span><br><span class="line">    preds_sigmoid = torch.sigmoid(preds)</span><br><span class="line">    score = f1_score(target.cpu(), preds_sigmoid.cpu() &gt; <span class="number">0.5</span>, average=<span class="string">'macro'</span>)</span><br><span class="line">    <span class="keyword">return</span> score</span><br></pre></td></tr></table></figure>
+<ul>
+<li>아래는 train 함수 입니다. batch마다 training을 시키고 loss로 back propagation 시키고 optimizer로 weight parameter들을 업데이트 합니다 (<code>optimizer.step()</code>). </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, iterator, optimizer, criterion)</span>:</span></span><br><span class="line">    epoch_loss = <span class="number">0</span></span><br><span class="line">    epoch_f1score = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    model.train()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> iterator:</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        </span><br><span class="line">        predictions = model(batch.question_text).squeeze(<span class="number">1</span>)</span><br><span class="line">        loss = criterion(predictions.double(), batch.target.double())</span><br><span class="line">        f1 = f1score(predictions, batch.target)</span><br><span class="line"></span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        </span><br><span class="line">        epoch_loss += loss.item()</span><br><span class="line">        epoch_f1score += f1.item()       </span><br><span class="line">    <span class="keyword">return</span> epoch_loss / len(iterator), epoch_f1score / len(iterator)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>아래의 evaluate 함수에서는 training에 있었던 back propagation과 parameter learning을 제외합니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate</span><span class="params">(model, iterator, criterion)</span>:</span></span><br><span class="line">    epoch_loss = <span class="number">0</span></span><br><span class="line">    epoch_f1score = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    model.eval()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> batch <span class="keyword">in</span> iterator:</span><br><span class="line">            </span><br><span class="line">            predictions = model(batch.question_text).squeeze(<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">            loss = criterion(predictions.double(), batch.target.double())</span><br><span class="line">            f1 = f1score(predictions, batch.target)</span><br><span class="line">            </span><br><span class="line">            epoch_loss += loss.item()</span><br><span class="line">            epoch_f1score += f1.item()</span><br><span class="line">    <span class="keyword">return</span> epoch_loss / len(iterator), epoch_f1score / len(iterator)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>한 epoch당 걸리는 시간을 재기 위해서 epoch_time함수를 만듭니다</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">epoch_time</span><span class="params">(start_time, end_time)</span>:</span></span><br><span class="line">    elapsed_time = end_time - start_time</span><br><span class="line">    elapsed_mins = int(elapsed_time / <span class="number">60</span>)</span><br><span class="line">    elapsed_secs = int(elapsed_time - (elapsed_mins * <span class="number">60</span>))</span><br><span class="line">    <span class="keyword">return</span> elapsed_mins, elapsed_secs</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이제 training을 시켜봅니다. epoch의 갯수는 15로 지정했습니다. 가장 성능이 잘 나왔을 때의 parameter들을 <code>torch.save(model.state_dict(), &#39;저장-하고자-하는-이름.pt&#39;)</code>를 통해 저장해 놓습니다. 나중에 불러올 때나, 이 모델을 가지고 더 training을 시킬 때 필요합니다. </li>
+<li>다양한 hyper parameter들을 설정해야 하기 때문에, 성능을 최대한 끌어올리기 위해서는 다양한 hyper parameter를 지정하며 성능을 확인해 보아야 합니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">N_EPOCHS = <span class="number">15</span></span><br><span class="line"></span><br><span class="line">best_valid_loss = float(<span class="string">'inf'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(N_EPOCHS):</span><br><span class="line"></span><br><span class="line">    start_time = time.time()</span><br><span class="line">    </span><br><span class="line">    train_loss, train_acc = train(model, train_iter, optimizer, criterion)</span><br><span class="line">    valid_loss, valid_acc = evaluate(model, val_iter, criterion)</span><br><span class="line">    </span><br><span class="line">    end_time = time.time()</span><br><span class="line"></span><br><span class="line">    epoch_mins, epoch_secs = epoch_time(start_time, end_time)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> valid_loss &lt; best_valid_loss:</span><br><span class="line">        best_valid_loss = valid_loss</span><br><span class="line">        torch.save(model.state_dict(), <span class="string">'cnn-model_15epochs.pt'</span>)</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">f'Epoch: <span class="subst">&#123;epoch+<span class="number">1</span>:<span class="number">02</span>&#125;</span> | Epoch Time: <span class="subst">&#123;epoch_mins&#125;</span>m <span class="subst">&#123;epoch_secs&#125;</span>s'</span>)</span><br><span class="line">    print(<span class="string">f'\tTrain Loss: <span class="subst">&#123;train_loss:<span class="number">.3</span>f&#125;</span> | Train f1-score: <span class="subst">&#123;train_acc*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span>%'</span>)</span><br><span class="line">    print(<span class="string">f'\t Val. Loss: <span class="subst">&#123;valid_loss:<span class="number">.3</span>f&#125;</span> |  Val. f1-score: <span class="subst">&#123;valid_acc*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span>%'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch: 01 | Epoch Time: 5m 6s
+    Train Loss: 0.129 | Train f1-score: 71.69%
+     Val. Loss: 0.155 |  Val. f1-score: 58.06%
+Epoch: 02 | Epoch Time: 5m 6s
+    Train Loss: 0.104 | Train f1-score: 78.03%
+     Val. Loss: 0.128 |  Val. f1-score: 63.59%
+Epoch: 03 | Epoch Time: 5m 6s
+    Train Loss: 0.090 | Train f1-score: 81.45%
+     Val. Loss: 0.128 |  Val. f1-score: 67.28%
+Epoch: 04 | Epoch Time: 5m 6s
+    Train Loss: 0.073 | Train f1-score: 85.39%
+     Val. Loss: 0.141 |  Val. f1-score: 67.93%
+Epoch: 05 | Epoch Time: 5m 5s
+    Train Loss: 0.056 | Train f1-score: 89.53%
+     Val. Loss: 0.158 |  Val. f1-score: 69.28%
+Epoch: 06 | Epoch Time: 5m 6s
+    Train Loss: 0.039 | Train f1-score: 92.85%
+     Val. Loss: 0.194 |  Val. f1-score: 68.36%
+Epoch: 07 | Epoch Time: 5m 6s
+    Train Loss: 0.027 | Train f1-score: 95.30%
+     Val. Loss: 0.220 |  Val. f1-score: 69.22%
+Epoch: 08 | Epoch Time: 5m 6s
+    Train Loss: 0.018 | Train f1-score: 96.77%
+     Val. Loss: 0.268 |  Val. f1-score: 68.23%
+Epoch: 09 | Epoch Time: 5m 6s
+    Train Loss: 0.013 | Train f1-score: 97.68%
+     Val. Loss: 0.335 |  Val. f1-score: 64.57%
+Epoch: 10 | Epoch Time: 5m 6s
+    Train Loss: 0.009 | Train f1-score: 98.36%
+     Val. Loss: 0.355 |  Val. f1-score: 66.62%
+Epoch: 11 | Epoch Time: 5m 6s
+    Train Loss: 0.008 | Train f1-score: 98.66%
+     Val. Loss: 0.405 |  Val. f1-score: 67.15%
+Epoch: 12 | Epoch Time: 5m 6s
+    Train Loss: 0.007 | Train f1-score: 98.82%
+     Val. Loss: 0.408 |  Val. f1-score: 67.16%
+Epoch: 13 | Epoch Time: 5m 6s
+    Train Loss: 0.005 | Train f1-score: 99.09%
+     Val. Loss: 0.415 |  Val. f1-score: 67.23%
+Epoch: 14 | Epoch Time: 5m 6s
+    Train Loss: 0.005 | Train f1-score: 99.14%
+     Val. Loss: 0.469 |  Val. f1-score: 66.84%
+Epoch: 15 | Epoch Time: 5m 6s
+    Train Loss: 0.004 | Train f1-score: 99.20%
+     Val. Loss: 0.503 |  Val. f1-score: 66.22%
+</code></pre><ul>
+<li>Pytorch를 통하여 CNN model for text classification를 구현해 보았습니다. Reference는 아래와 같습니다. Ben Trevett의 pytorch-sentiment-analysis는 다양한 모델을 쉽게 pytorch를 통해 구현해 놓았으므로 같이 공부하기 쉬운 repository입니다. 또한 part 1의 CNN 기본 개념/설명은 김기현 강사님 강의 자료를 통하여 정리했습니다. </li>
+</ul>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><ol>
+<li>Ben Trevett’s pytorch-sentiment-analysis <a href="https://github.com/bentrevett/pytorch-sentiment-analysis" target="_blank" rel="noopener">repository</a></li>
+<li>김기현 강사님의 자연어 처리를 위한 딥러닝 CAMP 강의 자료</li>
+</ol>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+
+</html>
