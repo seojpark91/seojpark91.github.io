@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Algorithms - Absolute Permutation (HackerRank)
+HackerRank 알고리즘 문제 중, subdomain 중 하나인 implementation에 있는 Absolute Permutation 문제 풀이 입니다. 
+
+문제 :We defin">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Algorithms - Absolute Permutation (HackerRank)">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Algorithms - Absolute Permutation (HackerRank)
+HackerRank 알고리즘 문제 중, subdomain 중 하나인 implementation에 있는 Absolute Permutation 문제 풀이 입니다. 
+
+문제 :We defin">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>Algorithms - Absolute Permutation (HackerRank) - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Algorithms - Absolute Permutation (HackerRank)</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-07-17
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/algorithm/">#algorithm</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/algorithm/">algorithm</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Algorithms-Absolute-Permutation-HackerRank"><a href="#Algorithms-Absolute-Permutation-HackerRank" class="headerlink" title="Algorithms - Absolute Permutation (HackerRank)"></a>Algorithms - Absolute Permutation (HackerRank)</h1><ul>
+<li>HackerRank 알고리즘 문제 중, subdomain 중 하나인 implementation에 있는 Absolute Permutation 문제 풀이 입니다. </li>
+</ul>
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제 :"></a>문제 :</h2><p>We define $P$ to be a permutation of the first $n$ natural numbers in the range $[1,n]$. Let $pos[i]$ denote the value at position $i$ in permutation $P$ using 1-based indexing.</p>
+<p>$P$ is considered to be an absolute permutation if $\left|pos[i] - i \right|=k$ holds true for every $i \in [1, n]$.</p>
+<p>Given $n$ and $k$, print the lexicographically smallest absolute permutation $P$. If no absolute permutation exists, print -1.</p>
+<p>For example, let $n=4$ giving us an array $pos = [1,2,3,4]$. If we use 1 based indexing, create a permutation where every $\left|pos[i] - i \right|=k$. If $k=2$, we could rearrange them to $[3,4,1,2]$:</p>
+<h3 id="Function-Description"><a href="#Function-Description" class="headerlink" title="Function Description"></a>Function Description</h3><p>It should return an integer that represents the smallest lexicographically smallest permutation, or $-1$ if there is none.</p>
+<p>absolutePermutation has the following parameter(s):</p>
+<ul>
+<li>n: the upper bound of natural numbers to consider, inclusive</li>
+<li>k: the integer difference between each element and its index</li>
+</ul>
+<h3 id="Input-Format"><a href="#Input-Format" class="headerlink" title="Input Format"></a>Input Format</h3><p>The first line contains an integer $t$, the number of test cases.<br>Each of the next $t$ lines contains 2 space-separated integers, $n$ and $k$.</p>
+<h3 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h3><ul>
+<li>$ 1\le t \le 10$</li>
+<li>$ 1 \le n \le 10^{5}$</li>
+<li>$ 0 \le k \le n$</li>
+</ul>
+<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation :"></a>Explanation :</h2><p>smallest absolute permutation (순열)을 찾는 문제입니다. 문제에서 준 예제를 보겠습니다. $n=4$라면, 1 based indexing으로 array (배열) $pos = [1,2,3,4]$ 를 만듭니다. 그 후, $\left|pos[i] - i \right|=k$ 가 되는 순열을 만듭니다. $k=2$ 라면, 각 position (숫자) 에서 2만큼 떨어져 있는 숫자와 swapping을 해 줍니다. 즉, $1 \rightarrow 3$, $2 \rightarrow 4$, $3 \rightarrow 1$, $4 \rightarrow 2$ 가 되고 이 순열은 $[3,4,1,2]$ 가 됩니다. </p>
+<table border="2" width="300" align="center">
+    <th>pos[i]</th>
+    <th>i</th>
+    <th>| Difference |</th>
+    <tr>
+        <th>3</th>
+        <th>1</th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>4</th>
+        <th>2</th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>1</th>
+        <th>3</th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>2</th>
+        <th>4</th>
+        <th>2</th>
+    </tr>
+</table>
+
+<p>HackerRank에서 제공하는 몇개의 예제를 보면 smallest absolute permutation이 되기 위한 <strong>조건</strong>이 하나가 있음을 확인할 수 있습니다:</p>
+<ul>
+<li>$\frac{N}{k}\%2 = 0$</li>
+</ul>
+<p>위의 조건은, 숫자 $1,2, … ,N $을 $K$개의 숫자가 있는 $\frac{N}{K}$개의 bucket으로 숫자를 bucket에 나누어 담아야 한다는 것을 의미합니다. 예제로 설명해 보겠습니다. $1,2,3,4,5,6,7,8,9,10,11,12$ 숫자 12개가 있습니다. 이 12개의 숫자의 바로 다음 permutation을 구해 봅니다.</p>
+<p><img src="fig1_absolute_permutation.png" alt="drawing" width="500"></p>
+<p>즉, $\frac{N}{K}$ 값이 4가 되고, 이 값이 의미하는 바는, 4개의 bucket이 permutation을 만들기 위해 있어야 한다는 것을 의미합니다. 또한 이렇게 나누어진 bucket의 갯수 또한 짝수여야 합니다 ($\%2= 0$). 위에 그림 처럼 1:1 swapping을 해 주어야 하는데 bucket size가 홀수라면 swapping이 불가능 하기 때문입니다. 확인하기 위해 $K$를 3이 아닌 4로 바꾸어 봅니다. </p>
+<p><img src="fig2_absolute_permutation.png" alt="drawing" width="700"></p>
+<p>그러면 오른쪽 숫자 $9,10,11,12$가 남게 됩니다. 그러므로 조건 $\frac{N}{k} \%2 = 0$ 이 성립해야 smallest absolute permutation을 만들 수 있다는 것을 확인할 수 있습니다. 즉 이 조건이 성립하지 않으면 바로 -1을 return해 줍니다.</p>
+<p><strong>Exception Case</strong></p>
+<ul>
+<li>k가 영이라면, 1부터 N까지의 숫자 그대로가 smallest absolute permutation이 됩니다. 즉, 그대로 1부터 N까지를 출력하면 됩니다.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
+<li><p>위에서 말한 Exception case 잡기 :</p>
+<ul>
+<li>(1) k==0일 때 모든 숫자 리턴</li>
+<li>(2) 조건 $\frac{N}{k}\% 2 = 0$ 을 성립하지 않으면 -1 리턴</li>
+</ul>
+</li>
+<li><p>위 케이스들에 해당하지 않는다면:</p>
+<ul>
+<li>(1) for loop을 통해 1부터 N까지 가면서 숫자 (i)에 difference k를 더해 줍니다</li>
+<li>(2) Ascending list이므로 처음에는 k를 더해주다가, i가 k와 같아지는 시점에서 부터는 k를 빼 주어야 합니다 그러므로 add 변수를 True라고 설정하고, i가 k와 같아지는 시점에서 부터 add를 False라고 설정한 후, k를 i에서 빼줍니다.</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">absolutePermutation</span><span class="params">(n, k)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> list(range(<span class="number">1</span>, n+<span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">elif</span> (n/k) % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        add = <span class="literal">True</span></span><br><span class="line">        res = []</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> add:</span><br><span class="line">                res.append(i+k)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res.append(i-k)</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">if</span> i % k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> add:</span><br><span class="line">                    add = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    add = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">' '</span>.join([str(i) <span class="keyword">for</span> i <span class="keyword">in</span> res])</span><br></pre></td></tr></table></figure>
+<h3 id="Test-Cases"><a href="#Test-Cases" class="headerlink" title="Test Cases"></a>Test Cases</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">absolutePermutation(<span class="number">4</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;3 4 1 2&#39;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">absolutePermutation(<span class="number">100</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&#39;3 4 1 2 7 8 5 6 11 12 9 10 15 16 13 14 19 20 17 18 23 24 21 22 27 28 25 26 31 32 29 30 35 36 33 34 39 40 37 38 43 44 41 42 47 48 45 46 51 52 49 50 55 56 53 54 59 60 57 58 63 64 61 62 67 68 65 66 71 72 69 70 75 76 73 74 79 80 77 78 83 84 81 82 87 88 85 86 91 92 89 90 95 96 93 94 99 100 97 98&#39;
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+
+</html>
