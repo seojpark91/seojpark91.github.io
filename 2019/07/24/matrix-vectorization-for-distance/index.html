@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Matrix Vectorization for Calculating Distance (without a loop!)Stanford 강의 CS231N: Convolutional Neural Networks for Visual Recognition의 첫 assignment인">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Matrix Vectorization for Calculating Distance">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Matrix Vectorization for Calculating Distance (without a loop!)Stanford 강의 CS231N: Convolutional Neural Networks for Visual Recognition의 첫 assignment인">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>Matrix Vectorization for Calculating Distance - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Matrix Vectorization for Calculating Distance</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-07-24
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/algorithm/">#algorithm</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/machine-learning/">machine learning</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Matrix-Vectorization-for-Calculating-Distance-without-a-loop"><a href="#Matrix-Vectorization-for-Calculating-Distance-without-a-loop" class="headerlink" title="Matrix Vectorization for Calculating Distance (without a loop!)"></a>Matrix Vectorization for Calculating Distance (without a loop!)</h1><p>Stanford 강의 CS231N: Convolutional Neural Networks for Visual Recognition의 첫 assignment인 “k nearest neighbor algorithm 구현하기”를 하며 Euclidean distance를 3가지 방법으로 구현해 보았는데, 그 과정을 정리했습니다. 이 assignment는 numpy에서 matrix manipulation을 자유자재로 할 수 있어야 감을 잡을 수 있습니다. Broadcasting, trasnpose, adding new axis와 같은 numpy의 기능들을 사용하여 assignment를 풀었습니다. </p>
+<p><a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank" rel="noopener">Euclidean Distance (L2-distance)</a> 는 두 벡터 간의 거리를 구하는 방법 중 하나입니다. 얼마나 두 벡터가 비슷한지 다른지를 측정할 때 사용됩니다. <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm" target="_blank" rel="noopener">K nearest neighbor</a> 알고리즘을 구현할 때, 트레이닝 데이터인 X_train matrix $R^{N_{train} \times D}$ 과 테스트 데이터인 X matrix $R^{N_{test} \times D}$ 사이의 L2 distance를 구해야 합니다. (여기서 D는 이미지의 dimension입니다). Assignment에서는 train 데이터는 5000개, test 데이터는 500개가 주어졌습니다. 이 두 matrices 사이의 distance를 보여주는 distance matrix $R^{N_{test} \times N_{train}}$ 를 구하는 것이 목표입니다. 이 distance matrix는 test matrix안에 있는 각각의 벡터를 train matrix에 있는 각각의 벡터와의 euclidean distance를 계산한 값이 들어가 있습니다. 어떻게 거리를 효율적으로 구할 수 있을지 제일 비효율적인 방법에서 제일 효율적인 방법 순으로 알아 봅니다. </p>
+<h2 id="1-Two-Loops"><a href="#1-Two-Loops" class="headerlink" title="1. Two Loops"></a>1. Two Loops</h2><p>가장 비효율적인 방법이지만 처음 거리를 계산한다고 생각했을 때, 가장 먼저 떠오르는 방법입니다. Training data에 있는 각 벡터와 test data에 있는 모든 벡터와의 거리를 구해야 하기 때문에 nested for loop으로 거리를 계산합니다. 코드는 아래와 같습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_distances_two_loops</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (num_test, D) containing test data.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    - dists: A numpy array of shape (num_test, num_train) where dists[i, j]</span></span><br><span class="line"><span class="string">      is the Euclidean distance between the ith test point and the jth training</span></span><br><span class="line"><span class="string">      point.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_train = self.X_train.shape[<span class="number">0</span>]</span><br><span class="line">    dists = np.zeros((num_test, num_train))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_test):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_train):</span><br><span class="line">            dists[i, j] = np.sqrt(np.sum((X[i] - self.X_train[j])**<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> dists</span><br></pre></td></tr></table></figure>
+<h2 id="2-Single-Loop"><a href="#2-Single-Loop" class="headerlink" title="2. Single Loop"></a>2. Single Loop</h2><p>아래에서 시간을 확인해 보겠지만, nested for loop으로 거리를 계산하는데에는 시간이 상당히 오래 걸립니다. 그렇기에 이번에는 하나의 for loop만 사용하여 거리를 계산해 봅니다. 이번에는 test data에만 for loop을 사용합니다. 여기서 single loop을 쓰면서 달라진 것은 numpy의 broadcasting을 이용했다는 점입니다. 다른 모양을 가진 array/tensor들의 연산을 표현할 때 <a href="https://docs.scipy.org/doc/numpy/user/theory.broadcasting.html#array-broadcasting-in-numpy" target="_blank" rel="noopener">Numpy broadcasting</a> 이라고 합니다. 간단하게 말하면, “작은 array가 큰 array에게 ‘broadcast’된다” (물론 constraints는 존재합니다)라고 할 수 있습니다. 2개의 broadcasting rule이 존재하는데 첫번째로는, 두 array/tensor가 있을 때,각 차원이 같거나, 두번째로는, 둘 중 하나의 차원이 1일 때 broadcasting이 가능합니다. 예를 들면 아래와 같습니다. </p>
+<p>a라는 4D array는 $3 \times 1 \times 6 \times 1$ 의 shape을 가지고 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.randn(<span class="number">3</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">1</span>)</span><br><span class="line">a.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(3, 1, 6, 1)
+</code></pre><p>b라는 3D array는 $2 \times 1 \times 5$ 의 shape을 가지고 있습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = np.random.randn(<span class="number">2</span>,<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line">b.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(2, 1, 5)
+</code></pre><p>두 array를 더했을 때, $3 \times 2 \times 6 \times 5$ 의 shape을 가지게 됩니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a + b).shape</span><br></pre></td></tr></table></figure>
+<pre><code>(3, 2, 6, 5)
+</code></pre><p>위의 두 array를 더할 때, broadcasting이 적용이 되는데, 아래와 같이 dimension을 맞추어 보면, broadcasting rule에서 언급했던 것 처럼, dimension이 1이면 더할 때, 큰 array의 dimension을 따라간다는 것을 확인할 수 있습니다. </p>
+<table>
+    <th>array</th>
+    <th>dimension</th>
+    <th colspan="4">shape</th>
+    <tr>
+        <th>a</th>
+        <td>4D</td>
+        <td>3</td>
+        <td>1</td>
+        <td>6</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <th>b</th>
+        <td>3D</td>
+        <td></td>
+        <td>2</td>
+        <td>1</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <th>a+b</th>
+        <td>4D</td>
+        <td>3</td>
+        <td>2</td>
+        <td>6</td>
+        <td>5</td>
+    </tr>
+</table>
+
+<p>즉, numpy의 broadcasting을 사용하면 거리를 구할 때, row-wise subtraction이 가능하게 됩니다. 즉 X_train 의 dimension인 (num_train $\times D$)에서 각 테스트의 dimension인 ($1 \times D$)를 각 training data row에서 subtraction을 하면서 거리를 계산합니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_distances_one_loop</span><span class="params">(self, X)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Compute the distance between each test point in X and each training point</span></span><br><span class="line"><span class="string">  in self.X_train using a single loop over the test data.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Input / Output: Same as compute_distances_two_loops</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">  num_train = self.X_train.shape[<span class="number">0</span>]</span><br><span class="line">  dists = np.zeros((num_test, num_train))</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_test):</span><br><span class="line">      dists[i, :] = np.sqrt(np.sum((self.X_train - X[i, :])**<span class="number">2</span>, axis=<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> dists</span><br></pre></td></tr></table></figure>
+<h2 id="Without-Loop"><a href="#Without-Loop" class="headerlink" title="Without Loop"></a>Without Loop</h2><p>한 단계 더 나아가서, 이제는 loop없이 거리를 계산해 봅니다. 어떻게 계산을 해야하나 고민을 했었는데 힌트는 Wikipedia Euclidean distance page에서 얻었습니다. 아래와 같이 두 벡터의 거리를 연산할 때 아래와 같이 계산을 하므로,</p>
+<script type="math/tex; mode=display">|| p - q || =  \sqrt{|| p ||^2 + || q ||^2 - 2 \cdot p \cdot q}</script><p>numpy broadcasting을 사용하면 한번에 모든 벡터와의 거리를 계산할 수 있습니다. 첫 두 term은 X_train과 X_test의 row의 L2 norm을 구하는 것이므로 쉽고 마지막 term인 $2 \cdot p \cdot q$ 는 vector를 dot product시킬 때처럼, X_train을 transpose시켜서 곱하면 됩니다. 하지만 어려운 점은 이 세개의 dimension이 맞지 않은 matrices를 더해야 합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_distances_no_loops</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Compute the distance between each test point in X and each training point</span></span><br><span class="line"><span class="string">    in self.X_train using no explicit loops.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Input / Output: Same as compute_distances_two_loops</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_train = self.X_train.shape[<span class="number">0</span>] </span><br><span class="line">    dists = np.sqrt(np.sum(self.X_train**<span class="number">2</span>, axis=<span class="number">1</span>) + np.sum(X**<span class="number">2</span>, axis=<span class="number">1</span>)[:, np.newaxis] <span class="number">-2</span> * np.dot(X, self.X_train.T))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dists</span><br></pre></td></tr></table></figure>
+<p>위의 코드를 보면 <code>np.sum(self.X_train**2, axis=1)</code>의 shape는 (5000,) 이고, <code>np.sum(X**2, axis=1)</code>은 (500,)이며 두 matrix간의 dot product를 한 <code>np.dot(X, self.X_train.T)</code>의 shape은 (500,5000) 입니다. 이렇게 세 matrices를 더하려고 하면 오류가 나는데 그 이유는, <code>np.sum(X**2, axis=1)</code>의 dimension이 맞지 않기 때문입니다. 500 은 distance matrix의 column의 dimension이기 때문에 row vector를 column vector로 만들어야 하는데, 이 때 새 dimension을 만들어 주는 <code>[:, np.newaxis]</code>를 사용하여 (500,1)의 차원으로 만들어 주었습니다. </p>
+<h2 id="Compare-3-methods-of-calculating-Euclidean-distance"><a href="#Compare-3-methods-of-calculating-Euclidean-distance" class="headerlink" title="Compare 3 methods of calculating Euclidean distance"></a>Compare 3 methods of calculating Euclidean distance</h2><p>위에 3가지의 L2 distance로 training과 prediction을 하는데 걸리는 시간을 확인합니다 (time function은 CS231N assignment에서 구현해져 있는 함수로 아래에는 넣지 않았습니다).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">two_loop_time = time_function(classifier.compute_distances_two_loops, X_test)</span><br><span class="line">print(<span class="string">'Two loop version took %f seconds'</span> % two_loop_time)</span><br><span class="line"></span><br><span class="line">one_loop_time = time_function(classifier.compute_distances_one_loop, X_test)</span><br><span class="line">print(<span class="string">'One loop version took %f seconds'</span> % one_loop_time)</span><br><span class="line"></span><br><span class="line">no_loop_time = time_function(classifier.compute_distances_no_loops, X_test)</span><br><span class="line">print(<span class="string">'No loop version took %f seconds'</span> % no_loop_time)</span><br></pre></td></tr></table></figure>
+<pre><code>Two loop version took 29.039080 seconds
+One loop version took 20.465272 seconds
+No loop version took 0.139282 seconds
+</code></pre><p>Nested loop으로 distance를 구하는 데에는 29초가 걸렸고, 1개의 loop은 20초가 걸리면서 약 9초가 줄어들었음을 확인할 수 있습니다. 엄청난 차이는 아닙니다. 하지만 loop없이 broadcasting을 사용하여 구한 distance는 약 0.13초 밖에 걸리지 않습니다. numpy를 잘 활용만 하면 약 계산을 하는데 150배의 시간을 절약할 수 있습니다. </p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+
+</html>
