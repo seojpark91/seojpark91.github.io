@@ -239,28 +239,28 @@ HackerRank 알고리즘 문제 중, subdomain 중 하나인 implementation에 �
 </ul>
 <h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation :"></a>Explanation :</h2><p>smallest absolute permutation (순열)을 찾는 문제입니다. 문제에서 준 예제를 보겠습니다. $n=4$라면, 1 based indexing으로 array (배열) $pos = [1,2,3,4]$ 를 만듭니다. 그 후, $\left|pos[i] - i \right|=k$ 가 되는 순열을 만듭니다. $k=2$ 라면, 각 position (숫자) 에서 2만큼 떨어져 있는 숫자와 swapping을 해 줍니다. 즉, $1 \rightarrow 3$, $2 \rightarrow 4$, $3 \rightarrow 1$, $4 \rightarrow 2$ 가 되고 이 순열은 $[3,4,1,2]$ 가 됩니다. </p>
 <table border="2" width="300" align="center">
-    <th>pos[i]</th>
-    <th>i</th>
-    <th>| Difference |</th>
+    <th style="text-align: center;">pos[i]</th>
+    <th style="text-align: center;">i</th>
+    <th style="text-align: center;">| Difference |</th>
     <tr>
-        <th>3</th>
+        <th style="text-align: center;">3</th>
         <th>1</th>
-        <th>2</th>
+        <th style="text-align: center;">2</th>
     </tr>
     <tr>
-        <th>4</th>
+        <th style="text-align: center;">4</th>
         <th>2</th>
-        <th>2</th>
+        <th style="text-align: center;">2</th>
     </tr>
     <tr>
-        <th>1</th>
+        <th style="text-align: center;">1</th>
         <th>3</th>
-        <th>2</th>
+        <th style="text-align: center;">2</th>
     </tr>
     <tr>
-        <th>2</th>
+        <th style="text-align: center;">2</th>
         <th>4</th>
-        <th>2</th>
+        <th style="text-align: center;">2</th>
     </tr>
 </table>
 

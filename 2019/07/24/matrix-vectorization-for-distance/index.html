@@ -228,29 +228,29 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a + b).shape</span><br></pre></td></tr></table></figure>
 <pre><code>(3, 2, 6, 5)
 </code></pre><p>위의 두 array를 더할 때, broadcasting이 적용이 되는데, 아래와 같이 dimension을 맞추어 보면, broadcasting rule에서 언급했던 것 처럼, dimension이 1이면 더할 때, 큰 array의 dimension을 따라간다는 것을 확인할 수 있습니다. </p>
-<table>
-    <th>array</th>
-    <th>dimension</th>
-    <th colspan="4">shape</th>
+<table border="2" width="400" align="center">
+    <th style="text-align: center;">array</th>
+    <th style="text-align: center;">dimension</th>
+    <th style="text-align: center;" colspan="4">shape</th>
     <tr>
-        <th>a</th>
-        <td>4D</td>
+        <th style="text-align: center;">a</th>
+        <td style="text-align: center;">4D</td>
         <td>3</td>
         <td>1</td>
         <td>6</td>
         <td>1</td>
     </tr>
     <tr>
-        <th>b</th>
-        <td>3D</td>
+        <th style="text-align: center;">b</th>
+        <td style="text-align: center;">3D</td>
         <td></td>
         <td>2</td>
         <td>1</td>
         <td>5</td>
     </tr>
     <tr>
-        <th>a+b</th>
-        <td>4D</td>
+        <th style="text-align: center;">a+b</th>
+        <td style="text-align: center;">4D</td>
         <td>3</td>
         <td>2</td>
         <td>6</td>
