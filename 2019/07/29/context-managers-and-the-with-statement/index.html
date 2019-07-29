@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Context Managers and the with Statement
+with statement와 context manager에 대해서 알아봅니다. 사실 쓰는 방법만 알고, 안에서는 어떻게 작동되는지 제대로 공부해 보지 않았었는데, 이번에 recommendation ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Seo Jung Park">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Context Managers and the with Statement">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Context Managers and the with Statement
+with statement와 context manager에 대해서 알아봅니다. 사실 쓰는 방법만 알고, 안에서는 어떻게 작동되는지 제대로 공부해 보지 않았었는데, 이번에 recommendation ">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Seojung&#39;s Daily">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://seojpark91.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>Context Managers and the with Statement - Seojung&#39;s Daily</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Seojung's Daily</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/seojpark91">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Context Managers and the with Statement</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-07-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/python/">#python</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/programming/">programming</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Context-Managers-and-the-with-Statement"><a href="#Context-Managers-and-the-with-Statement" class="headerlink" title="Context Managers and the with Statement"></a>Context Managers and the with Statement</h1><ul>
+<li>with statement와 context manager에 대해서 알아봅니다. 사실 쓰는 방법만 알고, 안에서는 어떻게 작동되는지 제대로 공부해 보지 않았었는데, 이번에 recommendation system을 구현해보면서 with statement를 썼기 때문에, 공부해 보았습니다. With statement를 제대로 이해하기 위해서는 decorator와 generator에 대한 사전 지식이 있어야 합니다. </li>
+</ul>
+<h2 id="With-Statement"><a href="#With-Statement" class="headerlink" title="With Statement?"></a>With Statement?</h2><p>with statement는 리소스 관리 패턴 기능들을 추상화 시켜서, 따로 떼어내어 재사용 할 수 있도록 함으로서 리소스 관리를 간단하게 만들어 줍니다. 제가 with statement를 사용한 예시는 아래와 같습니다. for문 안에서 여러 파일을 열고 닫아야 했는데, 간단하게 with statement로 <code>with open(path) as f</code> 사용하여 파일을 열고 닫는 과정을 실행했습니다. 밑의 코드는 복잡하니 간단한 예시를 들어 봅니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># class안에 있던 __iter__ function 입니다 </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        n_files = len(self.paths)</span><br><span class="line">        form = <span class="string">'iter=&#123;&#125;, file=&#123;&#125;/&#123;&#125;, sents=&#123;&#125;'</span></span><br><span class="line">        <span class="keyword">for</span> i_p, path <span class="keyword">in</span> enumerate(self.paths):</span><br><span class="line">            <span class="keyword">with</span> open(path) <span class="keyword">as</span> f:</span><br><span class="line">                <span class="keyword">for</span> i_doc, doc <span class="keyword">in</span> enumerate(f):</span><br><span class="line">                    <span class="keyword">if</span> self.verbose <span class="keyword">and</span> (i_doc % <span class="number">10000</span> == <span class="number">0</span>):</span><br><span class="line">                        message = form.format(self.n_iter, i_p, n_files, i_doc)</span><br><span class="line">                        print(<span class="string">"\r&#123;&#125;"</span>.format(message), end=<span class="string">''</span>)</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">yield</span> self._clean(doc)</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        print(<span class="string">'\rException file=&#123;&#125;, sents=&#123;&#125;'</span>.format(i_p, i_doc))</span><br><span class="line">                        print(e)</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> self.verbose:</span><br><span class="line">            message = form.format(self.n_iter, i_p, n_files, i_doc)</span><br><span class="line">        self.n_iter += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>아래는 with statement로 data_science.txt파일을 만들고, 문장 ‘what have you learned today?’을 적었습니다. 간단하고 깔끔합니다. with을 사용하여 파일을 여는 것이 좋고, 추천되는 이유는 <code>open</code>안에 있는 파일이 자동적으로 with statement가 끝나면 종료되기 때문입니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'data_science.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'what have you learned today? '</span>)</span><br><span class="line">    f.write(<span class="string">'the with statement!'</span>)</span><br></pre></td></tr></table></figure>
+<p>만약 with statement를 사용하지 않고, 파일을 열고 닫는다면 아래와 같이 해야 하는데, 보다시피 5줄이나 됩니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'data_science.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f.write(<span class="string">'what have you learned today? '</span>)</span><br><span class="line">    f.write(<span class="string">'the with statement!'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+<p>위에서 try와 finally statement는 아주 중요합니다. 그 이유는 <code>f.write</code> 에서 예외/에러가 생긴다면 아래와 같이 쓰는 것만으로는 완전히 파일을 닫혔다는 것을 보장하지 못하기 때문입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 아래는 파일이 완전히 닫혔다는 것을 보장할 수 없습니다!</span></span><br><span class="line">f = open(<span class="string">'data_science.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'what have you learned today? '</span>)</span><br><span class="line">f.write(<span class="string">'the with statement!'</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<h2 id="Make-My-Own-Context-Managers"><a href="#Make-My-Own-Context-Managers" class="headerlink" title="Make My Own Context Managers"></a>Make My Own Context Managers</h2><p>위와 같은 기능을 <strong>context managers</strong>를 사용하여 직접 만든 클래스나 함수에 입힐 수 있습니다. Context Manager란 with statement를 직접 만든 객체가 지원하기 위해 따라야 하는 약속또는 인터페이스입니다. 간단하게 ‘<strong>enter</strong>‘ 와 ‘<strong>exit</strong>‘ 함수를 클래스에 넣어줌으로서 직접 만든 객체가 context manager로 작동 하도록 하게 할 수 있습니다. 아래와 같이 MyResourceManagement 클래스를 만들어 <code>open()</code> context manager가 동작하게 해 봅니다. 주의 해야 할 점은 <a href="https://docs.quantifiedcode.com/python-anti-patterns/correctness/exit_must_accept_three_arguments.html" target="_blank" rel="noopener">exit 함수에는 3개의 argument가 필요합니다</a> : type, value, traceback.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyResourceManagement</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, file_name)</span>:</span></span><br><span class="line">        self.file_name = file_name</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.file = open(self.file_name, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">return</span> self.file</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># exit함수에는 3개의 argument가 필요합니다 (type, value, traceback)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, ex_type, ex_val, ex_tb)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.file:</span><br><span class="line">            self.file.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> MyResourceManagement(<span class="string">'data_science.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'what have you learned today? '</span>)</span><br><span class="line">    f.write(<span class="string">'the with statement!'</span>)</span><br></pre></td></tr></table></figure>
+<p>위와 같이 MyResourceManagement 클래스는 context manager 인터페이스를 따랐고, with statement가 지원이 되는 것을 확인할 수 있습니다. Python은 with statement 안에 있는 내용(context) 으로 들어갈 때 (enter), <code>__enter__</code>를 호출하여 리소스를 얻습니다. 그리고 context를 떠날 때, <code>__exit__</code>함수를 호출하여 리소스가 해제 됩니다. </p>
+<p>위 처럼 클래스 기반의 context manager를 사용하는 것만이 방법은 아닙니다. Python의 <code>contextlib</code> 모듈의 <code>contextmanager</code> decorator를 사용하면 with statement를 자동적으로 지원하는 generator 기반의 factory function (closure)를 정의할 수 있습니다. 위의 MyResourceManagement context manager를 decorator기반으로 만들어 봅니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_management</span><span class="params">(file_name)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = open(file_name, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">yield</span> f</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> resource_management(<span class="string">'data_science.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'what have you learned today? '</span>)</span><br><span class="line">    f.write(<span class="string">'the with statement!'</span>)</span><br></pre></td></tr></table></figure>
+<p>위의 경우, <code>resource_management()</code> 함수는 generator이며, 첫번째로 리소스를 얻습니다. 그 후, 실행을 잠시 멈추고, 리소스를 <em>yield</em> 함으로서 호출자가 리소스를 사용할 수 있게 합니다. 호출자가 with안에 있는 내용을 떠나면, generator는 계속 실행이 되어 남아있는 step들이 실행되게 되고, 리소스는 해제가 됩니다. 클래스 기반 방법과 generator 기반 방법의 context manager는 근본적으로는 같기에 선호하는 방법을 사용하면 됩니다. </p>
+<h2 id="Implementation-Example-Timer"><a href="#Implementation-Example-Timer" class="headerlink" title="Implementation Example : Timer!"></a>Implementation Example : Timer!</h2><p>위에서 배운 내용으로 code block의 실행 시간을 측정하는 context manager를 작성해 봅니다. 두가지 방법, class-based와 generator-based로 만들어 봅니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span>:</span>    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, task)</span>:</span></span><br><span class="line">        self.task = task</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.start = time.time()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, ex_type, ex_val, ex_tb)</span>:</span></span><br><span class="line">        self.end = time.time()</span><br><span class="line">        self.interval = self.end - self.start</span><br><span class="line">        print(<span class="string">f"<span class="subst">&#123;self.task&#125;</span>: <span class="subst">&#123;self.end - self.start&#125;</span> seconds"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> Timer(<span class="string">"List Comprehension"</span>):</span><br><span class="line">    s = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br></pre></td></tr></table></figure>
+<pre><code>List Comprehension: 0.6686520576477051 seconds
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timing</span><span class="params">(task)</span>:</span></span><br><span class="line">    start = time.time()</span><br><span class="line">    <span class="comment"># yield를 하면 with 안에 있는 내용이 실행됩니다</span></span><br><span class="line">    <span class="keyword">yield</span> </span><br><span class="line">    end = time.time() </span><br><span class="line">    interval = end - start</span><br><span class="line">    print(<span class="string">f"<span class="subst">&#123;task&#125;</span>: <span class="subst">&#123;interval&#125;</span> seconds"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> timing(<span class="string">"List Comprehension"</span>):</span><br><span class="line">    s = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br></pre></td></tr></table></figure>
+<pre><code>List Comprehension: 0.6721289157867432 seconds
+</code></pre><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>with statement는 try/finally를 사용한 exception 처리를 캡슐화 하여 context managers란 이름으로 간단하게 만들어 줍니다.</li>
+<li>가장 많이 with statement가 쓰이는 경우는 리소스 관리 (획득과 해제)할 때 입니다. 리소스는 with statement와 함께 얻어지고, 자동적으로 with statement를 떠날 때 해제 됩니다.</li>
+<li>with statement를 효율적으로 사용하면 리소스 누수를 막을 수 있으며, 코드가 쉽게 읽히도록 해줍니다</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/seojpark91" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Seo Jung Park<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+
+</html>
